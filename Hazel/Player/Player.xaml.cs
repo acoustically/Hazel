@@ -13,14 +13,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Hazel
+namespace Hazel.Player
 {
     /// <summary>
-    /// MainWindow.xaml에 대한 상호 작용 논리
+    /// Player.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class MainWindow : NavigationWindow
+    public partial class Player : UserControl
     {
-        public MainWindow()
+        public Player()
         {
             InitializeComponent();
         }
