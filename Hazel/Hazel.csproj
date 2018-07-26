@@ -122,6 +122,14 @@
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="Image\PlayButton.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\PlayNext.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\PlayBack.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
