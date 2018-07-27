@@ -24,5 +24,10 @@ namespace Hazel.Player
         {
             InitializeComponent();
         }
+
+        private void AddMusicImageMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            MessageBox.Show("test");
+        }
     }
 }

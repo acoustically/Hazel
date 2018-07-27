@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/playback.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/addmusic.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/searchmusic.png")]
 
 

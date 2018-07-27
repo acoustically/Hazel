@@ -5,7 +5,7 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hazel.Player"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="500">
+             d:DesignHeight="800" d:DesignWidth="900">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
@@ -14,9 +14,13 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="300"/>
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="40"/>
             </Grid.ColumnDefinitions>
+            <TextBox Grid.Column="1"/>
+            <Image Grid.Column="2" Source="/Image/SearchMusic.png"/>
+            <Image Grid.Column="3" Source="/Image/AddMusic.png" MouseUp="AddMusicImageMouseUp"/>
         </Grid>
     </Grid>
 </UserControl>
