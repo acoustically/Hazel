@@ -15,19 +15,31 @@ using System.Windows.Shapes;
 
 namespace Hazel.Player
 {
+    enum Pages { PlayListPage, SearchPage }
     /// <summary>
     /// PlayerPage.xaml에 대한 상호 작용 논리
     /// </summary>
     public partial class PlayerPage : Page
     {
+        private int rightPage = (int)Pages.PlayListPage;
+
         public PlayerPage()
         {
             InitializeComponent();
         }
 
-        private void Player_Loaded(object sender, RoutedEventArgs e)
+        private void AddMusicImageClicked(object sender, EventArgs e)
         {
+            rightPage = (int)Pages.SearchPage;
+            playListPage.Visibility = Visibility.Collapsed;
+            youtubeSearchPage.Visibility = Visibility.Visible;
+        }
 
+        private void MusicListImageClicked(object sender, EventArgs e)
+        {
+            rightPage = (int)Pages.PlayListPage;
+            youtubeSearchPage.Visibility = Visibility.Collapsed;
+            playListPage.Visibility = Visibility.Visible;
         }
     }
 }

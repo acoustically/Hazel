@@ -11,5 +11,26 @@
             <RowDefinition Height="40"/>
             <RowDefinition Height="1*"/>
         </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="3*"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+            </Grid>
+            <Grid Grid.Column="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="1*"/>
+                    <ColumnDefinition Width="40"/>
+                </Grid.ColumnDefinitions>
+                <Image Grid.Column="1" Source="/Image/List.png" MouseUp="MusicListImageMouseUp"/>
+            </Grid>
+        </Grid>
     </Grid>
 </UserControl>

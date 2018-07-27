@@ -20,6 +20,8 @@ namespace Hazel.Player
     /// </summary>
     public partial class PlayList : UserControl
     {
+        public event EventHandler AddMusicImageClicked;
+
         public PlayList()
         {
             InitializeComponent();
@@ -27,7 +29,7 @@ namespace Hazel.Player
 
         private void AddMusicImageMouseUp(object sender, MouseButtonEventArgs e)
         {
-            MessageBox.Show("test");
+            AddMusicImageClicked?.Invoke(this, EventArgs.Empty);
         }
     }
 }
