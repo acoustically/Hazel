@@ -23,6 +23,8 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
+                <TextBox Grid.Column="1" x:Name="KeywordTextBox"/>
+                <Image Grid.Column="2" Source="/Image/SearchMusic.png" MouseUp="SearchMusicImageMouseUp"/>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
