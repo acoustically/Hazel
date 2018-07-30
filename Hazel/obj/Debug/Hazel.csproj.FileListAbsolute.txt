@@ -22,3 +22,6 @@ D:\Home\Hazel\Hazel\Hazel\obj\Debug\Player\PlayListPage.g.cs
 D:\Home\Hazel\Hazel\Hazel\obj\Debug\Player\SearchPage.g.cs
 D:\Home\Hazel\Hazel\Hazel\obj\Debug\Player\PlayListPage.baml
 D:\Home\Hazel\Hazel\Hazel\obj\Debug\Player\SearchPage.baml
+D:\Home\Hazel\Hazel\Hazel\bin\Debug\Newtonsoft.Json.dll
+D:\Home\Hazel\Hazel\Hazel\bin\Debug\Newtonsoft.Json.xml
+D:\Home\Hazel\Hazel\Hazel\obj\Debug\Hazel.csproj.CopyComplete

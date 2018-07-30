@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -37,23 +38,33 @@ namespace Hazel.Player
         {
             string keyword = KeywordTextBox.Text;
             string key = Preference.youtebeApiKey;
-            string part = "snippet";
-
-            string responseText = "";
+            string part = "id, snippet";
+            string searchResult = "";        
 
             HttpWebRequest request = (HttpWebRequest)WebRequest.Create(BuildQueryaUrl(part, key, keyword));
             request.Method = "GET";
             request.Timeout = 10000;
-            using (HttpWebResponse resp = (HttpWebResponse)request.GetResponse())
+            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
             {
-                HttpStatusCode status = resp.StatusCode;
-                Console.WriteLine(status);
-
-                Stream respStream = resp.GetResponseStream();
-                using (StreamReader sr = new StreamReader(respStream))
+                string status = response.StatusCode.ToString();
+                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
                 {
-                    responseText = sr.ReadToEnd();
+                    searchResult = reader.ReadToEnd();
                 }
+                JObject json = JObject.Parse(searchResult);
+                JArray youtubeItems = JArray.Parse(json["items"].ToString());
+                List<YoutubeSearchItem> youtubeSearchItems = new List<YoutubeSearchItem>();
+                foreach (JObject youtubeItem in youtubeItems)
+                {
+                    String videoId = youtubeItem["id"]["videoId"].ToString();
+                    String title = youtubeItem["snippet"]["title"].ToString();
+                    String channel = youtubeItem["snippet"]["channelTitle"].ToString();
+                    String thumbnail = youtubeItem["snippet"]["thumbnails"]["high"]["url"].ToString();
+                    YoutubeSearchItem youtubeSearchItem = new YoutubeSearchItem(videoId, title, channel, thumbnail);
+                    youtubeSearchItems.Add(youtubeSearchItem);
+                }
+                
+                MessageBox.Show(String.Join("\n", youtubeSearchItems));
             }
         }
         private string BuildQueryaUrl(string part, string key, string keyword)
