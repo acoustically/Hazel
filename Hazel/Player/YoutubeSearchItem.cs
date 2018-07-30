@@ -8,8 +8,8 @@ using System.Windows.Controls;
 
 namespace Hazel.Player
 {
-    class YoutubeSearchItemList : ObservableCollection<YoutubeSearchItem> { }
-    class YoutubeSearchItem
+    public class YoutubeSearchItemList : ObservableCollection<YoutubeSearchItem> { }
+    public class YoutubeSearchItem
     {
         private String videoId;
         private String title;

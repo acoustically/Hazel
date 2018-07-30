@@ -23,15 +23,15 @@
             <Image Grid.Column="2" Source="/Image/SearchMusic.png"/>
             <Image Grid.Column="3" Source="/Image/AddMusic.png" MouseUp="AddMusicImageMouseUp"/>
         </Grid>
-        <ListBox x:Name="PlayListBox" Grid.Row="1">
+        <ListBox PreviewMouseDoubleClick="PlayListDoubleClick" x:Name="PlayListBox" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="100">
+                    <Grid Height="90">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="170"/>
+                            <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Source="{Binding Thumbnail}" />
+                        <Image Grid.Column="0" Stretch="UniformToFill" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Thumbnail}" />
                         <TextBlock Grid.Column="1" Text="{Binding Title}"/>
                     </Grid>
                 </DataTemplate>   

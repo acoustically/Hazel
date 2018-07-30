@@ -20,9 +20,18 @@ namespace Hazel.Player
     /// </summary>
     public partial class Player : UserControl
     {
+        private YoutubeSearchItem currentMusic;
         public Player()
         {
             InitializeComponent();
+        }
+        public YoutubeSearchItem CurrentMusic
+        {
+            get => this.currentMusic;
+            set {
+                this.currentMusic = value;
+                PlayerThumbnail.Source = new BitmapImage(new Uri(this.currentMusic.Thumbnail));
+            }
         }
     }
 }

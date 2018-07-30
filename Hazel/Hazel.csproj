@@ -66,6 +66,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Compile Include="DataEventArgs.cs" />
     <Compile Include="Player\PlayList.cs" />
     <Compile Include="Player\YoutubeSearchItem.cs" />
     <Compile Include="Preference.cs" />

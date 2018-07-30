@@ -13,8 +13,8 @@
             <ColumnDefinition Width="500"/>
             <ColumnDefinition Width="1*"/>
         </Grid.ColumnDefinitions>
-        <local:Player Grid.Column="0"/>
-        <local:PlayListPage x:Name="playListPage" Grid.Column="1" AddMusicImageClicked="AddMusicImageClicked"/>
-        <local:SearchPage x:Name="youtubeSearchPage" Grid.Column="1" Visibility="Collapsed" MusicListImageClicked="MusicListImageClicked"/>
+        <local:Player x:Name="Player" Grid.Column="0"/>
+        <local:PlayListPage x:Name="playListPage" Grid.Column="1" addMusicImageClick="AddMusicImageClick" playListDoubleClick="PlayListDoubleClick"/>
+        <local:SearchPage x:Name="youtubeSearchPage" Grid.Column="1" Visibility="Collapsed" musicListImageClick="MusicListImageClick"/>
     </Grid>
 </Page>

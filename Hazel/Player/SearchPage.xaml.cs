@@ -23,7 +23,7 @@ namespace Hazel.Player
     /// </summary>
     public partial class SearchPage : UserControl
     {
-        public event EventHandler MusicListImageClicked;
+        public event EventHandler musicListImageClick;
         public SearchPage()
         {
             InitializeComponent();
@@ -31,7 +31,7 @@ namespace Hazel.Player
 
         private void MusicListImageMouseUp(object sender, MouseButtonEventArgs e)
         {
-            MusicListImageClicked?.Invoke(sender, EventArgs.Empty);
+            musicListImageClick?.Invoke(sender, EventArgs.Empty);
         }
 
         private void SearchMusicImageMouseUp(object sender, MouseButtonEventArgs e)

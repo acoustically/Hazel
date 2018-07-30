@@ -21,25 +21,26 @@ namespace Hazel.Player
     /// </summary>
     public partial class PlayerPage : Page
     {
-        private int rightPage = (int)Pages.PlayListPage;
-
         public PlayerPage()
         {
             InitializeComponent();
         }
 
-        private void AddMusicImageClicked(object sender, EventArgs e)
+        private void AddMusicImageClick(object sender, EventArgs e)
         {
-            rightPage = (int)Pages.SearchPage;
             playListPage.Visibility = Visibility.Collapsed;
             youtubeSearchPage.Visibility = Visibility.Visible;
         }
 
-        private void MusicListImageClicked(object sender, EventArgs e)
+        private void MusicListImageClick(object sender, EventArgs e)
         {
-            rightPage = (int)Pages.PlayListPage;
             youtubeSearchPage.Visibility = Visibility.Collapsed;
             playListPage.Visibility = Visibility.Visible;
+        }
+        
+        private void PlayListDoubleClick(object sender, EventArgs e)
+        {
+            Player.CurrentMusic = (e as DataEventArgs).Data1 as YoutubeSearchItem;
         }
     }
 }

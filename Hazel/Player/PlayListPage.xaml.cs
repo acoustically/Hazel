@@ -20,8 +20,8 @@ namespace Hazel.Player
     /// </summary>
     public partial class PlayListPage : UserControl
     {
-        public event EventHandler AddMusicImageClicked;
-        public event EventHandler PlayListClicked;
+        public event EventHandler addMusicImageClick;
+        public event EventHandler playListDoubleClick;
 
         public PlayListPage()
         {
@@ -35,14 +35,16 @@ namespace Hazel.Player
 
         private void AddMusicImageMouseUp(object sender, MouseButtonEventArgs e)
         {
-            AddMusicImageClicked?.Invoke(this, EventArgs.Empty);
+            addMusicImageClick?.Invoke(this, EventArgs.Empty);
         }
 
         private void PlayListDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBoxItem item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
             YoutubeSearchItem currentMusic = item.Content as YoutubeSearchItem;
-            PlayList.CurrentMusic = currentMusic;
+            DataEventArgs args = new DataEventArgs();
+            args.Data1 = currentMusic;
+            playListDoubleClick?.Invoke(this, args);
         }
     }
 }
