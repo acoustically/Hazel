@@ -36,6 +36,7 @@ namespace Hazel.Player
         {
             youtubeSearchPage.Visibility = Visibility.Collapsed;
             playListPage.Visibility = Visibility.Visible;
+            playListPage.refreshPlayList();
         }
         
         private void PlayListDoubleClick(object sender, EventArgs e)

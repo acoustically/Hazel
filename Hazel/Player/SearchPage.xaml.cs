@@ -86,7 +86,9 @@ namespace Hazel.Player
             YoutubeSearchItem selectedItem = item.Content as YoutubeSearchItem;
             if (item != null)
             {
-                PlayList.List.Add(selectedItem);
+                PlayList.addItem(selectedItem);
+                PlayList.Save();
+                musicListImageClick?.Invoke(sender, EventArgs.Empty);
             }
         }
     }

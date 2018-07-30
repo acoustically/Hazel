@@ -1,5 +1,8 @@
-﻿using System;
+﻿using Hazel.Player;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -23,6 +26,7 @@ namespace Hazel
         public MainWindow()
         {
             InitializeComponent();
+            PlayList.Load();
         }
     }
 }

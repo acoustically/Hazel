@@ -26,11 +26,11 @@ namespace Hazel.Player
         public PlayListPage()
         {
             InitializeComponent();
+            PlayListBox.ItemsSource = PlayList.List;
         }
 
-        private void PlayListPageLoaded(object sender, RoutedEventArgs e)
+        public void refreshPlayList()
         {
-            PlayListBox.ItemsSource = PlayList.List;
         }
 
         private void AddMusicImageMouseUp(object sender, MouseButtonEventArgs e)
@@ -40,11 +40,17 @@ namespace Hazel.Player
 
         private void PlayListDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ListBoxItem item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
-            YoutubeSearchItem currentMusic = item.Content as YoutubeSearchItem;
-            DataEventArgs args = new DataEventArgs();
-            args.Data1 = currentMusic;
-            playListDoubleClick?.Invoke(this, args);
+            try {
+                ListBoxItem item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
+                YoutubeSearchItem currentMusic = item.Content as YoutubeSearchItem;
+                DataEventArgs args = new DataEventArgs();
+                args.Data1 = currentMusic;
+                playListDoubleClick?.Invoke(this, args);
+            } catch (Exception)
+            {
+                
+            }
         }
+
     }
 }
