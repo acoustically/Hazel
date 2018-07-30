@@ -56,22 +56,38 @@ namespace Hazel.Player
                 List<YoutubeSearchItem> youtubeSearchItems = new List<YoutubeSearchItem>();
                 foreach (JObject youtubeItem in youtubeItems)
                 {
-                    String videoId = youtubeItem["id"]["videoId"].ToString();
-                    String title = youtubeItem["snippet"]["title"].ToString();
-                    String channel = youtubeItem["snippet"]["channelTitle"].ToString();
-                    String thumbnail = youtubeItem["snippet"]["thumbnails"]["high"]["url"].ToString();
-                    YoutubeSearchItem youtubeSearchItem = new YoutubeSearchItem(videoId, title, channel, thumbnail);
-                    youtubeSearchItems.Add(youtubeSearchItem);
+                    try
+                    {
+                        String videoId = youtubeItem["id"]["videoId"].ToString();
+                        String title = youtubeItem["snippet"]["title"].ToString();
+                        String channel = youtubeItem["snippet"]["channelTitle"].ToString();
+                        String thumbnail = youtubeItem["snippet"]["thumbnails"]["high"]["url"].ToString();
+                        YoutubeSearchItem youtubeSearchItem = new YoutubeSearchItem(videoId, title, channel, thumbnail);
+                        youtubeSearchItems.Add(youtubeSearchItem);
+                    } catch(Exception)
+                    {
+                        continue;
+                    }
                 }
-                
-                MessageBox.Show(String.Join("\n", youtubeSearchItems));
+                youtubeSearchListBox.ItemsSource = youtubeSearchItems;
             }
         }
         private string BuildQueryaUrl(string part, string key, string keyword)
         {
-            string url = "https://www.googleapis.com/youtube/v3/search";
+            string url = "https://www.googleapis.com/youtube/v3/search/";
             string query = url + "?part=" + part + "&key=" + key + "&q=" + keyword;
+            query += "&type=video&maxResults=50";
             return query;
+        }
+
+        private void YoutubeItemDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListBoxItem item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
+            YoutubeSearchItem selectedItem = item.Content as YoutubeSearchItem;
+            if (item != null)
+            {
+                PlayList.List.Add(selectedItem);
+            }
         }
     }
 }

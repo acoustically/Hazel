@@ -18,18 +18,31 @@ namespace Hazel.Player
     /// <summary>
     /// PlayList.xaml에 대한 상호 작용 논리
     /// </summary>
-    public partial class PlayList : UserControl
+    public partial class PlayListPage : UserControl
     {
         public event EventHandler AddMusicImageClicked;
+        public event EventHandler PlayListClicked;
 
-        public PlayList()
+        public PlayListPage()
         {
             InitializeComponent();
+        }
+
+        private void PlayListPageLoaded(object sender, RoutedEventArgs e)
+        {
+            PlayListBox.ItemsSource = PlayList.List;
         }
 
         private void AddMusicImageMouseUp(object sender, MouseButtonEventArgs e)
         {
             AddMusicImageClicked?.Invoke(this, EventArgs.Empty);
+        }
+
+        private void PlayListDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ListBoxItem item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
+            YoutubeSearchItem currentMusic = item.Content as YoutubeSearchItem;
+            PlayList.CurrentMusic = currentMusic;
         }
     }
 }
