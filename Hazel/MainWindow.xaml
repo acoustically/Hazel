@@ -8,6 +8,7 @@
         Source="Player/PlayerPage.xaml"
         ShowsNavigationUI="False"
         Height="800" Width="1400"
+        ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" 
         Title="MainWindow" MinHeight="800" MinWidth="1400">

@@ -36,6 +36,10 @@ namespace Hazel.Player
 
         private void SearchMusicImageMouseUp(object sender, MouseButtonEventArgs e)
         {
+            searchMusic();
+        }
+        private void searchMusic()
+        {
             string keyword = KeywordTextBox.Text;
             string key = Preference.youtebeApiKey;
             string part = "id, snippet";
@@ -83,12 +87,27 @@ namespace Hazel.Player
         private void YoutubeItemDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ListBoxItem item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
-            YoutubeSearchItem selectedItem = item.Content as YoutubeSearchItem;
-            if (item != null)
+            try
             {
-                PlayList.addItem(selectedItem);
-                PlayList.Save();
-                musicListImageClick?.Invoke(sender, EventArgs.Empty);
+                YoutubeSearchItem selectedItem = item.Content as YoutubeSearchItem;
+                if (item != null)
+                {
+                    PlayList.addItem(selectedItem);
+                    PlayList.Save();
+                    musicListImageClick?.Invoke(sender, EventArgs.Empty);
+                }
+            }
+            catch(Exception)
+            {
+
+            }
+        }
+
+        private void KeywordTextBoxKeyUp(object sender, KeyEventArgs e)
+        {
+            if(e.Key == Key.Enter)
+            {
+                searchMusic();
             }
         }
     }

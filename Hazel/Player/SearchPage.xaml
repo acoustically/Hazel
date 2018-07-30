@@ -23,7 +23,9 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="1" x:Name="KeywordTextBox"/>
+                <TextBox Grid.Column="1" x:Name="KeywordTextBox"
+                         FontSize="20" Padding="5"
+                         KeyUp="KeywordTextBoxKeyUp"/>
                 <Image Grid.Column="2" Source="/Image/SearchMusic.png" 
                        MouseLeftButtonUp="SearchMusicImageMouseUp"/>
             </Grid>
