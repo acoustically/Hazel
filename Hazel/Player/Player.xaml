@@ -18,7 +18,10 @@
                 <RowDefinition Height="280"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Image Grid.Row="1" x:Name="PlayerThumbnail" Stretch="UniformToFill" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Grid.Row="1" x:Name="PlayerThumbnail" 
+                   Stretch="UniformToFill" 
+                   VerticalAlignment="Center" 
+                   RenderOptions.BitmapScalingMode="HighQuality"/>
         </Grid>
         <Grid Grid.Row="1" Background="DarkGray"/>
         <Grid Grid.Row="2" Background="Beige">

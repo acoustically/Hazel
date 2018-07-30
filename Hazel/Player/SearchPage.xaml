@@ -24,17 +24,21 @@
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
                 <TextBox Grid.Column="1" x:Name="KeywordTextBox"/>
-                <Image Grid.Column="2" Source="/Image/SearchMusic.png" MouseUp="SearchMusicImageMouseUp"/>
+                <Image Grid.Column="2" Source="/Image/SearchMusic.png" 
+                       MouseLeftButtonUp="SearchMusicImageMouseUp"/>
             </Grid>
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="1" Source="/Image/List.png" MouseUp="MusicListImageMouseUp"/>
+                <Image Grid.Column="1" Source="/Image/List.png" 
+                       MouseLeftButtonUp="MusicListImageMouseUp"/>
             </Grid>
         </Grid>
-        <ListBox PreviewMouseDoubleClick="YoutubeItemDoubleClick" x:Name="youtubeSearchListBox" ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
+        <ListBox PreviewMouseDoubleClick="YoutubeItemDoubleClick" 
+                 x:Name="youtubeSearchListBox" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="168">
@@ -42,7 +46,11 @@
                             <ColumnDefinition Width="300"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Image  Grid.Column="0" Source="{Binding Thumbnail}" Stretch="UniformToFill" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" />
+                        <Image  Grid.Column="0" 
+                                Source="{Binding Thumbnail}" 
+                                Stretch="UniformToFill" 
+                                VerticalAlignment="Center" 
+                                RenderOptions.BitmapScalingMode="HighQuality" />
                         <Grid Grid.Column="1">
                             <Grid.RowDefinitions>
                                 <RowDefinition/>

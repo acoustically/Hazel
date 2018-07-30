@@ -7,14 +7,36 @@
       mc:Ignorable="d" 
       d:DesignHeight="800" d:DesignWidth="1400"
       Title="PlayerPage">
-
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="500"/>
-            <ColumnDefinition Width="1*"/>
-        </Grid.ColumnDefinitions>
-        <local:Player x:Name="Player" Grid.Column="0"/>
-        <local:PlayListPage x:Name="playListPage" Grid.Column="1" addMusicImageClick="AddMusicImageClick" playListDoubleClick="PlayListDoubleClick"/>
-        <local:SearchPage x:Name="youtubeSearchPage" Grid.Column="1" Visibility="Collapsed" musicListImageClick="MusicListImageClick"/>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+                <ColumnDefinition Width="30"/>
+            </Grid.ColumnDefinitions>
+            <TextBlock Grid.Column="0"
+                 MouseLeftButtonDown="TitleBarMouseDown"/>
+            <Border x:Name="windowCloseImage" Grid.Column="3"
+                    RenderOptions.BitmapScalingMode="HighQuality"
+                       MouseLeftButtonUp="WindowCloseImageMouseUp"
+                       MouseEnter="WindowCloseImageMouseEnter"
+                       MouseLeave="WindowCloseImageMouseLeave">
+                <Image Source="/Image/Close.png"/>
+            </Border>
+        </Grid>
+        <Grid Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="500"/>
+                <ColumnDefinition Width="1*"/>
+            </Grid.ColumnDefinitions>
+            <local:Player x:Name="Player" Grid.Column="0"/>
+            <local:PlayListPage x:Name="playListPage" Grid.Column="1" addMusicImageClick="AddMusicImageClick" playListDoubleClick="PlayListDoubleClick"/>
+            <local:SearchPage x:Name="youtubeSearchPage" Grid.Column="1" Visibility="Collapsed" musicListImageClick="MusicListImageClick"/>
+        </Grid>
     </Grid>
 </Page>

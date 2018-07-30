@@ -20,7 +20,7 @@
             </Grid.ColumnDefinitions>
             <TextBox Grid.Column="1"/>
             <Image Grid.Column="2" Source="/Image/SearchMusic.png"/>
-            <Image Grid.Column="3" Source="/Image/AddMusic.png" MouseUp="AddMusicImageMouseUp"/>
+            <Image Grid.Column="3" Source="/Image/AddMusic.png" MouseLeftButtonUp="AddMusicImageMouseUp"/>
         </Grid>
         <ListBox PreviewMouseDoubleClick="PlayListDoubleClick" x:Name="PlayListBox" Grid.Row="1">
             <ListBox.ItemTemplate>

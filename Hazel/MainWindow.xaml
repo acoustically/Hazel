@@ -11,4 +11,7 @@
         WindowStartupLocation="CenterScreen"
         WindowStyle="None" 
         Title="MainWindow" MinHeight="800" MinWidth="1400">
+    <WindowChrome.WindowChrome>
+        <WindowChrome CaptionHeight="0"/>
+    </WindowChrome.WindowChrome>
 </NavigationWindow>

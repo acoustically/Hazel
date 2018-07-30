@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -21,6 +22,8 @@ namespace Hazel.Player
     /// </summary>
     public partial class PlayerPage : Page
     {
+        private bool isTitleBarCliked = false;
+        private Point currentPosition = new Point();
         public PlayerPage()
         {
             InitializeComponent();
@@ -42,6 +45,33 @@ namespace Hazel.Player
         private void PlayListDoubleClick(object sender, EventArgs e)
         {
             Player.CurrentMusic = (e as DataEventArgs).Data1 as YoutubeSearchItem;
+        }
+
+        private void WindowCloseImageMouseUp(object sender, MouseButtonEventArgs e)
+        {
+            MainWindow window = Application.Current.MainWindow as MainWindow;
+            if(window != null)
+            {
+                window.Close();
+            }
+        }
+
+        private void WindowCloseImageMouseEnter(object sender, MouseEventArgs e)
+        {
+            windowCloseImage.Background = new SolidColorBrush(Colors.OrangeRed);
+        }
+
+        private void WindowCloseImageMouseLeave(object sender, MouseEventArgs e)
+        {
+            windowCloseImage.Background = new SolidColorBrush(Colors.White);
+        }
+
+        private void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            isTitleBarCliked = true;
+            currentPosition = PointToScreen(e.GetPosition(this));
+            MainWindow window = Application.Current.MainWindow as MainWindow;
+            window.DragMove();
         }
     }
 }
