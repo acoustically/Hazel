@@ -40,46 +40,36 @@ namespace Hazel.Player
         }
         private void searchMusic()
         {
-            string keyword = KeywordTextBox.Text;
-            string key = Preference.youtebeApiKey;
-            string part = "id, snippet";
-            string searchResult = "";        
+            String keyword = KeywordTextBox.Text;
+            String key = Preference.youtebeApiKey;
+            String part = "id, snippet";
+            String url = BuildQueryaUrl(part, key, keyword);
 
-            HttpWebRequest request = (HttpWebRequest)WebRequest.Create(BuildQueryaUrl(part, key, keyword));
-            request.Method = "GET";
-            request.Timeout = 10000;
-            using (HttpWebResponse response = (HttpWebResponse)request.GetResponse())
+            String searchResult = HttpRequest.OpenUrl(url);
+            JObject json = JObject.Parse(searchResult);
+            JArray youtubeItems = JArray.Parse(json["items"].ToString());
+            List<YoutubeSearchItem> youtubeSearchItems = new List<YoutubeSearchItem>();
+            foreach (JObject youtubeItem in youtubeItems)
             {
-                string status = response.StatusCode.ToString();
-                using (StreamReader reader = new StreamReader(response.GetResponseStream()))
+                try
                 {
-                    searchResult = reader.ReadToEnd();
-                }
-                JObject json = JObject.Parse(searchResult);
-                JArray youtubeItems = JArray.Parse(json["items"].ToString());
-                List<YoutubeSearchItem> youtubeSearchItems = new List<YoutubeSearchItem>();
-                foreach (JObject youtubeItem in youtubeItems)
+                    String videoId = youtubeItem["id"]["videoId"].ToString();
+                    String title = youtubeItem["snippet"]["title"].ToString();
+                    String channel = youtubeItem["snippet"]["channelTitle"].ToString();
+                    String thumbnail = youtubeItem["snippet"]["thumbnails"]["high"]["url"].ToString();
+                    YoutubeSearchItem youtubeSearchItem = new YoutubeSearchItem(videoId, title, channel, thumbnail);
+                    youtubeSearchItems.Add(youtubeSearchItem);
+                } catch(Exception)
                 {
-                    try
-                    {
-                        String videoId = youtubeItem["id"]["videoId"].ToString();
-                        String title = youtubeItem["snippet"]["title"].ToString();
-                        String channel = youtubeItem["snippet"]["channelTitle"].ToString();
-                        String thumbnail = youtubeItem["snippet"]["thumbnails"]["high"]["url"].ToString();
-                        YoutubeSearchItem youtubeSearchItem = new YoutubeSearchItem(videoId, title, channel, thumbnail);
-                        youtubeSearchItems.Add(youtubeSearchItem);
-                    } catch(Exception)
-                    {
-                        continue;
-                    }
+                    continue;
                 }
-                youtubeSearchListBox.ItemsSource = youtubeSearchItems;
             }
+            youtubeSearchListBox.ItemsSource = youtubeSearchItems;
         }
-        private string BuildQueryaUrl(string part, string key, string keyword)
+        private String BuildQueryaUrl(String part, String key, String keyword)
         {
-            string url = "https://www.googleapis.com/youtube/v3/search/";
-            string query = url + "?part=" + part + "&key=" + key + "&q=" + keyword;
+            String url = "https://www.googleapis.com/youtube/v3/search/";
+            String query = url + "?part=" + part + "&key=" + key + "&q=" + keyword;
             query += "&type=video&maxResults=50";
             return query;
         }
