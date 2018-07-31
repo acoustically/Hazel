@@ -23,6 +23,10 @@ namespace Hazel.Player
             this.channel = channel;
             this.thumbnail = thumbnail;
         }
+        public String WatchUrl
+        {
+            get => "https://www.youtube.com/watch?v=" + this.videoId;
+        }
 
         public String VidioId
         {

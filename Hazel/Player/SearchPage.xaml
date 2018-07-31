@@ -34,8 +34,12 @@
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="40"/>
                 </Grid.ColumnDefinitions>
-                <Image Grid.Column="1" Source="/Image/List.png" 
-                       MouseLeftButtonUp="MusicListImageMouseUp"/>
+                <Border Grid.Column="1" MouseEnter="ImageMouseEnter"
+                        MouseLeave="ImageMouseLeave">
+                    <Image Source="/Image/List.png"
+                        Margin="7"
+                        MouseLeftButtonUp="MusicListImageMouseUp"/>   
+                </Border>
             </Grid>
         </Grid>
         <ListBox PreviewMouseDoubleClick="YoutubeItemDoubleClick" 

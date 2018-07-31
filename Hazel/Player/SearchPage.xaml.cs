@@ -110,5 +110,15 @@ namespace Hazel.Player
                 searchMusic();
             }
         }
+
+        private void ImageMouseEnter(object sender, MouseEventArgs e)
+        {
+            (e.Source as Border).Background = new SolidColorBrush(Colors.LightGray);
+        }
+
+        private void ImageMouseLeave(object sender, MouseEventArgs e)
+        {
+            (e.Source as Border).Background = new SolidColorBrush(Colors.White);
+        }
     }
 }
