@@ -67,6 +67,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="DataEventArgs.cs" />
+    <Compile Include="HttpRequest.cs" />
+    <Compile Include="Pattern.cs" />
     <Compile Include="Player\PlayList.cs" />
     <Compile Include="Player\YoutubeSearchItem.cs" />
     <Compile Include="Preference.cs" />

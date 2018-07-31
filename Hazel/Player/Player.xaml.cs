@@ -37,32 +37,48 @@ namespace Hazel.Player
                 this.currentMusic = value;
                 PlayerThumbnail.Source = new BitmapImage(new Uri(this.currentMusic.Thumbnail));
                 String watchUrl = this.currentMusic.WatchUrl;
-                WebRequest request = WebRequest.Create(watchUrl);
-                using (WebResponse response = request.GetResponse())
-                {
-                    using (StreamReader reader = new StreamReader(response.GetResponseStream()))
-                    {
-                        String watchHtml = reader.ReadToEnd();
-                        String pattern = @";ytplayer\.config\s*=\s*({.*?});";
-                        Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
-                        MatchCollection matches = regex.Matches(watchHtml);
-                        if(matches.Count > 0)
-                        {
-                            foreach (Match match in matches)
-                            {
-                                String doc = match.Value.Substring(match.Value.IndexOf("{"));
-                                doc = doc.Substring(0, doc.Length - 1);
-                                JObject json = JObject.Parse(doc);
-                                String[] adaptiveFmts = json["args"]["adaptive_fmts"].ToString().Split(',');
-                                Debug.WriteLine(String.Join("\n", adaptiveFmts));
-                            }
-                        }
-                    }
-                        
-                }
+                String watchHtml = HttpRequest.OpenUrl(watchUrl);
+                String pattern = @";ytplayer\.config\s*=\s*({.*?});";
 
-                
+                String doc = Pattern.match(pattern, watchHtml);
+                Debug.WriteLine(doc);
+                doc = doc.Substring(doc.IndexOf("{"));
+                doc = doc.Substring(0, doc.Length - 1);
+                JObject json = JObject.Parse(doc);
+                String[] adaptiveFmts = json["args"]["adaptive_fmts"].ToString().Split(',');
+                List<String> audioFmts = getAudioFmts(adaptiveFmts);
+                foreach (String fmt in audioFmts)
+                {
+                    JObject infos = DescrambleFmt(fmt);
+                    Debug.Write(infos.ToString());
+                    Debug.Write("==============================================");
+                }
             }
+        }
+        private List<String> getAudioFmts(String[] adaptiveFmts)
+        {
+            List<String> audioFmts = new List<string>();
+            foreach(String fmt in adaptiveFmts)
+            {
+                if(fmt.Contains("type=audio"))
+                {
+                    audioFmts.Add(fmt);
+                }
+            }
+            return audioFmts;
+        }
+        private JObject DescrambleFmt(String fmt)
+        {
+            String[] infos = fmt.Split('&');
+            JObject json = new JObject();
+            foreach(String info in infos)
+            {
+                String[] keyValue = info.Split('=');
+                String key = keyValue[0];
+                String value = keyValue[1];
+                json.Add(key, value);
+            }
+            return json;
         }
     }
 }
