@@ -25,8 +25,8 @@ namespace Hazel
             List<String> audioFmts = Youtube.getAudioFmts(adaptiveFmts);
 
             String baseJs = HttpRequest.OpenUrl(baseJsUrl);
-            String signateFuctionName = getSignateFunctionName(baseJs);
-            MessageBox.Show(signateFuctionName);
+            List<String> signateKeys = getSignateKeys(baseJs);
+            Debug.WriteLine(String.Join("\n", signateKeys));
 
             JObject infos = DescrambleFmt(audioFmts[0]);
             return infos;
@@ -88,6 +88,15 @@ namespace Hazel
             signateFucntionName = signateFucntionName.Split(',')[1];
             signateFucntionName = signateFucntionName.Substring(0, signateFucntionName.Length - 1);
             return signateFucntionName;
+        }
+
+
+        private static List<String> getSignateKeys(String baseJs)
+        {
+            String pattern = getSignateFunctionName(baseJs) + "=function\\(\\w\\){[a-z=\\.\\(\\\"\\)]*;(.*);(?:.+)}";
+            String fuction = Pattern.Match(pattern, baseJs);
+            String[] signateKey = fuction.Split(';');
+            return signateKey.ToList().GetRange(1, signateKey.Length - 2);
         }
     }
 }
