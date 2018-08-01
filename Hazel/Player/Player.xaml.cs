@@ -38,10 +38,7 @@ namespace Hazel.Player
                 PlayerThumbnail.Source = new BitmapImage(new Uri(this.currentMusic.Thumbnail));
                 String watchUrl = this.currentMusic.WatchUrl;
                 JObject audioFmt = Youtube.getAudioFmt(watchUrl);
-                MessageBox.Show(audioFmt.ToString());
             }
         }
-        
-        
     }
 }

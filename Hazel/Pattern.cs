@@ -10,7 +10,7 @@ namespace Hazel
 {
     public class Pattern
     {
-        public static String match(String pattern, String document)
+        public static String Match(String pattern, String document)
         {
             Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
             MatchCollection matches = regex.Matches(document);

@@ -5,6 +5,7 @@ using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows;
 
 namespace Hazel
 {
@@ -15,14 +16,19 @@ namespace Hazel
             String watchHtml = HttpRequest.OpenUrl(watchUrl);
             String pattern = @";ytplayer\.config\s*=\s*({.*?});";
 
-            String doc = Pattern.match(pattern, watchHtml);
+            String doc = Pattern.Match(pattern, watchHtml);
             doc = doc.Substring(doc.IndexOf("{"));
             doc = doc.Substring(0, doc.Length - 1);
             JObject json = JObject.Parse(doc);
-            String baseJs = "https://youtube.com" + json["assets"]["js"].ToString();
+            String baseJsUrl = "https://youtube.com" + json["assets"]["js"].ToString();
             String[] adaptiveFmts = json["args"]["adaptive_fmts"].ToString().Split(',');
             List<String> audioFmts = Youtube.getAudioFmts(adaptiveFmts);
-            JObject infos = DescrambleFmt(audioFmts[0], baseJs);
+
+            String baseJs = HttpRequest.OpenUrl(baseJsUrl);
+            String signateFuctionName = getSignateFunctionName(baseJs);
+            MessageBox.Show(signateFuctionName);
+
+            JObject infos = DescrambleFmt(audioFmts[0]);
             return infos;
         }
 
@@ -39,11 +45,10 @@ namespace Hazel
             return audioFmts;
         }
 
-        private static JObject DescrambleFmt(String fmt, String baseJs)
+        private static JObject DescrambleFmt(String fmt)
         {
             String[] infos = fmt.Split('&');
             JObject json = new JObject();
-            json.Add("base_js", baseJs);
             foreach (String info in infos)
             {
                 String[] keyValue = info.Split('=');
@@ -74,6 +79,15 @@ namespace Hazel
             text = text.Replace("%3B", ";");
             text = text.Replace("%22", "\\");
             return text;
+        }
+
+        private static String getSignateFunctionName(String baseJs)
+        {
+            String pattern = "\"signature\",\\s?([a-zA-Z0-9$]+)\\(";
+            String signateFucntionName = Pattern.Match(pattern, baseJs);
+            signateFucntionName = signateFucntionName.Split(',')[1];
+            signateFucntionName = signateFucntionName.Substring(0, signateFucntionName.Length - 1);
+            return signateFucntionName;
         }
     }
 }
