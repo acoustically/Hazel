@@ -28,6 +28,11 @@ namespace Hazel.Player
             get => "https://www.youtube.com/watch?v=" + this.videoId;
         }
 
+        public String EmbedUrl
+        {
+            get => "http://www.youtube.com/embed/" + this.videoId;
+        }
+
         public String VidioId
         {
             get => this.videoId;

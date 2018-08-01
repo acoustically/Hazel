@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -18,9 +19,10 @@ namespace Hazel
             doc = doc.Substring(doc.IndexOf("{"));
             doc = doc.Substring(0, doc.Length - 1);
             JObject json = JObject.Parse(doc);
+            String baseJs = "https://youtube.com" + json["assets"]["js"].ToString();
             String[] adaptiveFmts = json["args"]["adaptive_fmts"].ToString().Split(',');
             List<String> audioFmts = Youtube.getAudioFmts(adaptiveFmts);
-            JObject infos = DescrambleFmt(audioFmts[0]);
+            JObject infos = DescrambleFmt(audioFmts[0], baseJs);
             return infos;
         }
 
@@ -37,10 +39,11 @@ namespace Hazel
             return audioFmts;
         }
 
-        private static JObject DescrambleFmt(String fmt)
+        private static JObject DescrambleFmt(String fmt, String baseJs)
         {
             String[] infos = fmt.Split('&');
             JObject json = new JObject();
+            json.Add("base_js", baseJs);
             foreach (String info in infos)
             {
                 String[] keyValue = info.Split('=');
