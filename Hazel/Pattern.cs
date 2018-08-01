@@ -16,5 +16,11 @@ namespace Hazel
             MatchCollection matches = regex.Matches(document);
             return matches[0].Value;
         }
+        public static String Match(String pattern, String document, RegexOptions options)
+        {
+            Regex regex = new Regex(pattern, options);
+            MatchCollection matches = regex.Matches(document);
+            return matches[0].Value;
+        }
     }
 }

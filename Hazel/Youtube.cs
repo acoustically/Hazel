@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 
@@ -24,9 +25,7 @@ namespace Hazel
             String[] adaptiveFmts = json["args"]["adaptive_fmts"].ToString().Split(',');
             List<String> audioFmts = Youtube.getAudioFmts(adaptiveFmts);
 
-            String baseJs = HttpRequest.OpenUrl(baseJsUrl);
-            List<String> signateKeys = getSignateKeys(baseJs);
-            Debug.WriteLine(String.Join("\n", signateKeys));
+            String signature = getSignature(baseJsUrl);
 
             JObject infos = DescrambleFmt(audioFmts[0]);
             return infos;
@@ -97,6 +96,27 @@ namespace Hazel
             String fuction = Pattern.Match(pattern, baseJs);
             String[] signateKey = fuction.Split(';');
             return signateKey.ToList().GetRange(1, signateKey.Length - 2);
+        }
+
+        private static String[] getSignateFunctions(String baseJs, String key)
+        {
+            String pattern = "var " + key + "={(.*?)};";
+            String signateObject = Pattern.Match(pattern, baseJs, RegexOptions.Singleline);
+            signateObject = signateObject.Substring(8);
+            signateObject = signateObject.Substring(0, signateObject.Length - 2);
+            String[] separator = { ",\n" };
+            return signateObject.Split(separator, StringSplitOptions.None);
+        }
+
+        private static String getSignature(String baseJsUrl)
+        {
+            String baseJs = HttpRequest.OpenUrl(baseJsUrl);
+            List<String> signateKeys = getSignateKeys(baseJs);
+            String signateKey = signateKeys[0].Split('.')[0];
+            String[] signateFunctions = getSignateFunctions(baseJs, signateKey);
+            Debug.WriteLine(String.Join("/", signateFunctions));
+
+            return "Test";
         }
     }
 }
