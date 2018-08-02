@@ -25,3 +25,6 @@ D:\Home\Hazel\Hazel\Hazel\obj\Debug\Player\SearchPage.baml
 D:\Home\Hazel\Hazel\Hazel\bin\Debug\Newtonsoft.Json.dll
 D:\Home\Hazel\Hazel\Hazel\bin\Debug\Newtonsoft.Json.xml
 D:\Home\Hazel\Hazel\Hazel\obj\Debug\Hazel.csproj.CopyComplete
+D:\Home\Hazel\Hazel\Hazel\bin\Debug\MsieJavaScriptEngine.dll
+D:\Home\Hazel\Hazel\Hazel\bin\Debug\MsieJavaScriptEngine.xml
+D:\Home\Hazel\Hazel\Hazel\bin\Debug\ru-ru\MsieJavaScriptEngine.resources.dll
