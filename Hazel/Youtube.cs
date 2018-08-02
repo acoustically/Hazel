@@ -10,6 +10,7 @@ using System.Windows;
 using System.Web;
 using MsieJavaScriptEngine;
 using MsieJavaScriptEngine.Helpers;
+using System.IO;
 
 namespace Hazel
 {

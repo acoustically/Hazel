@@ -8,6 +8,6 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/closebutton.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/stop.png")]
 
 
