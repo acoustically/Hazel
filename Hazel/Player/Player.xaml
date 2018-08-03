@@ -32,9 +32,16 @@
                 <ColumnDefinition/>
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
-            <Image Grid.Column="2" x:Name="playOrStopImage" Source="/Image/PlayButton.png" RenderOptions.BitmapScalingMode="HighQuality" MouseDown="PlayOrStopImageMouseDown"/>
-            <Image Grid.Column="3" Source="/Image/PlayNext.png" Margin="5" RenderOptions.BitmapScalingMode="HighQuality"/>
-            <Image Grid.Column="1" Source="/Image/PlayBack.png" Margin="5" RenderOptions.BitmapScalingMode="HighQuality"/>
+            <Image Grid.Column="2" x:Name="playOrStopImage" 
+                   Source="/Image/PlayButton.png" 
+                   RenderOptions.BitmapScalingMode="HighQuality" 
+                   MouseDown="PlayOrStopImageMouseDown"/>
+            <Image Grid.Column="3" Source="/Image/PlayNext.png" 
+                   Margin="5" RenderOptions.BitmapScalingMode="HighQuality"
+                   MouseDown="PlayNextImageMouseDown"/>
+            <Image Grid.Column="1" Source="/Image/PlayBack.png" 
+                   Margin="5" RenderOptions.BitmapScalingMode="HighQuality"
+                   MouseDown="PlayBackImageMouseDown"/>
         </Grid>
     </Grid>
 </UserControl>

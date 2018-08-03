@@ -38,37 +38,86 @@ namespace Hazel.Player
         {
             InitializeComponent();
             state = State.NotInit;
-            this.player = new WaveOutEvent();
+            player = new WaveOutEvent();
         }
+
         public YoutubeSearchItem CurrentMusic
         {
             get => this.currentMusic;
             set {
                 this.currentMusic = value;
-                PlayerThumbnail.Source = new BitmapImage(new Uri(this.currentMusic.Thumbnail));
-                String watchUrl = this.currentMusic.WatchUrl;
-                setPlayer(watchUrl);
+                SetPlayer();
                 Play();
             }
         }
 
-        public void setPlayer(String watchUrl)
+        public YoutubeSearchItem NextMusic
         {
-            JObject audioFmt = Youtube.getAudioFmt(watchUrl);
+            get
+            {
+                int index = PlayList.List.IndexOf(currentMusic);
+                int nextIndex;
+                if (index + 1 < PlayList.Count)
+                {
+                    nextIndex = index + 1;
+                }
+                else
+                {
+                    nextIndex = 0;
+                }
+                return PlayList.List[nextIndex];
+            }
+        }
+
+        public YoutubeSearchItem PreviousMusic
+        {
+            get
+            {
+                int index = PlayList.List.IndexOf(currentMusic);
+                int previousIndex;
+                if (index - 1 >= 0)
+                {
+                    previousIndex = index - 1;
+                }
+                else
+                {
+                    previousIndex = PlayList.Count - 1;
+                }
+                return PlayList.List[previousIndex];
+            }
+        }
+
+        private void PlaybackStopped(object sender, StoppedEventArgs e)
+        {
+            CurrentMusic = NextMusic;
+            Debug.WriteLine("test");
+            Debug.WriteLine(CurrentMusic);
+        }
+
+        private void SetPlayer()
+        {
+            if(state != State.NotInit)
+            {
+                player.PlaybackStopped -= new EventHandler<StoppedEventArgs>(PlaybackStopped);
+                player.Stop();
+            }
+            PlayerThumbnail.Source = new BitmapImage(new Uri(this.currentMusic.Thumbnail));
+            JObject audioFmt = Youtube.getAudioFmt(this.currentMusic.WatchUrl);
             MediaFoundationReader outputStream 
                 = new MediaFoundationReader(audioFmt["url"].ToString());
             WaveChannel32 volumeStream = new WaveChannel32(outputStream);
-            player.Stop();
+            volumeStream.PadWithZeroes = false;
+            player.PlaybackStopped += new EventHandler<StoppedEventArgs>(PlaybackStopped);
             player.Init(volumeStream);
         }
         
-        public void Play()
+        private void Play()
         {
             player.Play();
             state = State.Running;
             playOrStopImage.Source = new BitmapImage(new Uri(@"\image\Stop.png", UriKind.Relative));
         }
-        public void Pause()
+        private void Pause()
         {
             player.Pause();
             state = State.Stoped;
@@ -88,6 +137,16 @@ namespace Hazel.Player
             {
                 Play();
             }
+        }
+
+        private void PlayNextImageMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CurrentMusic = NextMusic;
+        }
+
+        private void PlayBackImageMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            CurrentMusic = PreviousMusic;
         }
     }
 }

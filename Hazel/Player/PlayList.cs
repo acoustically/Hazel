@@ -15,6 +15,7 @@ namespace Hazel.Player
     static class PlayList
     {
         private static ObservableCollection<YoutubeSearchItem> list = new ObservableCollection<YoutubeSearchItem>();
+        private static List<int> order = new List<int>();
         private static object _syncLock = new object();
         static void sync()
         {
@@ -24,13 +25,41 @@ namespace Hazel.Player
         {
             lock (_syncLock)
             {
+                order.Add(list.Count);
+                Shuffle();
                 list.Add(item);
             }
         }
+        private static void Shuffle(int time = 1)
+        {
+            for(int t = 0; t < time; t++) {
+                for(int i = 0; i < order.Count; i++)
+                {
+                    Random random = new Random();
+                    int index = random.Next(0, order.Count);
+                    int temp = order[i];
+                    order[i] = order[index];
+                    order[index] = temp;
+                }
+            }
+           
+        }
+
+        public static int Count
+        {
+            get => list.Count;
+        }
+
         public static ObservableCollection<YoutubeSearchItem> List
         {
             get => list;
         }
+
+        public static List<int> Order
+        {
+            get => order;
+        }
+
         public static void Load()
         {
             sync();
