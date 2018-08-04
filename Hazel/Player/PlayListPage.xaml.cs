@@ -52,5 +52,44 @@ namespace Hazel.Player
             }
         }
 
+        private void IconMouseEnter(object sender, MouseEventArgs e)
+        {
+            if(((Image)e.Source).Name == "addMusicImage")
+            {
+                addMusicImage.Source 
+                    = new BitmapImage(new Uri(@"\Image\AddMusicEnter.png", UriKind.Relative));
+            }
+            else
+            {
+                searchMusicImage.Source 
+                    = new BitmapImage(new Uri(@"\Image\SearchMusicEnter.png", UriKind.Relative));
+            }
+            Mouse.OverrideCursor = Cursors.Hand;
+       }
+
+        private void IconMouseLeave(object sender, MouseEventArgs e)
+        {
+            if(((Image)e.Source).Name == "addMusicImage")
+            {
+                addMusicImage.Source 
+                    = new BitmapImage(new Uri(@"\Image\AddMusic.png", UriKind.Relative));
+            }
+            else
+            {
+                searchMusicImage.Source 
+                    = new BitmapImage(new Uri(@"\Image\SearchMusic.png", UriKind.Relative));
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void SearchTextBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            searchTextBoxBorder.BorderBrush = new SolidColorBrush(Colors.OrangeRed);
+        }
+
+        private void SearchTextBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            searchTextBoxBorder.BorderBrush = new SolidColorBrush(Colors.DimGray);
+        }
     }
 }

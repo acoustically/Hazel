@@ -103,12 +103,36 @@ namespace Hazel.Player
 
         private void ImageMouseEnter(object sender, MouseEventArgs e)
         {
-            (e.Source as Border).Background = new SolidColorBrush(Colors.LightGray);
+            Image image = e.Source as Image;
+            if(image.Name == "listImage")
+            {
+                image.Source 
+                    = new BitmapImage(new Uri(@"\Image\ListEnter.png", UriKind.Relative));
+            }
+            else
+            {
+                image.Source 
+                    = new BitmapImage(new Uri(@"\Image\YoutubeSearchMusicEnter.png"
+                        , UriKind.Relative));
+            }
+            Mouse.OverrideCursor = Cursors.Hand;
         }
 
         private void ImageMouseLeave(object sender, MouseEventArgs e)
         {
-            (e.Source as Border).Background = new SolidColorBrush(Colors.White);
+            Image image = e.Source as Image;
+            if(image.Name == "listImage")
+            {
+                image.Source 
+                    = new BitmapImage(new Uri(@"\Image\List.png", UriKind.Relative));
+            }
+            else
+            {
+                image.Source 
+                    = new BitmapImage(new Uri(@"\Image\SearchMusic.png"
+                        , UriKind.Relative));
+            }
+            Mouse.OverrideCursor = Cursors.Arrow;
         }
     }
 }

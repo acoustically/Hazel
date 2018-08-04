@@ -161,5 +161,20 @@
   <ItemGroup>
     <Resource Include="Image\Stop.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\AddMusicEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\SearchMusicEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Triangle.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\YoutubeSearchMusicEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\ListEnter.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

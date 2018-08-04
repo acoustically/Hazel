@@ -14,18 +14,48 @@
         <Grid>
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="1*"/>
-                <ColumnDefinition Width="300"/>
+                <ColumnDefinition Width="340"/>
+                <ColumnDefinition Width="20"/>
                 <ColumnDefinition Width="40"/>
-                <ColumnDefinition Width="40"/>
+                <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
-            <TextBox Grid.Column="1"
-                     x:Name="searchTextBox"
-                     FontSize="20"
-                     Padding="5"/>
-            <Image Grid.Column="2" Source="/Image/SearchMusic.png"/>
-            <Image Grid.Column="3" Source="/Image/AddMusic.png" MouseLeftButtonUp="AddMusicImageMouseUp"/>
+            <Border x:Name="searchTextBoxBorder"
+                    Grid.Column="1"
+                    BorderBrush="DimGray"
+                    CornerRadius="15"
+                    BorderThickness="3">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <TextBox Grid.Column="0"
+                             BorderThickness="0"
+                             x:Name="searchTextBox"
+                             FontSize="20"
+                             Padding="5"
+                             GotFocus="SearchTextBoxGotFocus"
+                             LostFocus="SearchTextBoxLostFocus"
+                             Margin="10, 0, 0, 1"/>
+                    <Image Grid.Column="1"
+                           x:Name="searchMusicImage"
+                           MouseEnter="IconMouseEnter"
+                           MouseLeave="IconMouseLeave"
+                           Source="/Image/SearchMusic.png"
+                           Margin="2"
+                           RenderOptions.BitmapScalingMode="HighQuality" />
+                </Grid>
+            </Border>
+            <Image Source="/Image/AddMusic.png" 
+                   Grid.Column="3"
+                   x:Name="addMusicImage"
+                   MouseEnter="IconMouseEnter"
+                   MouseLeave="IconMouseLeave"
+                   MouseLeftButtonUp="AddMusicImageMouseUp" Margin="0"
+                   RenderOptions.BitmapScalingMode="HighQuality" />
         </Grid>
-        <ListBox PreviewMouseDoubleClick="PlayListDoubleClick" x:Name="PlayListBox" Grid.Row="1">
+        <ListBox PreviewMouseDoubleClick="PlayListDoubleClick" 
+                 x:Name="PlayListBox" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="90">
@@ -33,7 +63,10 @@
                             <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="1*"/>
                         </Grid.ColumnDefinitions>
-                        <Image Grid.Column="0" Stretch="UniformToFill" VerticalAlignment="Center" RenderOptions.BitmapScalingMode="HighQuality" Source="{Binding Thumbnail}" />
+                        <Image Grid.Column="0" Stretch="UniformToFill" 
+                               VerticalAlignment="Center" 
+                               RenderOptions.BitmapScalingMode="HighQuality" 
+                               Source="{Binding Thumbnail}" />
                         <TextBlock Grid.Column="1" Text="{Binding Title}"/>
                     </Grid>
                 </DataTemplate>   

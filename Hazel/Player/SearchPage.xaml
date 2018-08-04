@@ -17,29 +17,53 @@
                 <ColumnDefinition Width="3*"/>
                 <ColumnDefinition Width="1*"/>
             </Grid.ColumnDefinitions>
-            <Grid Grid.Column="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="40"/>
-                    <ColumnDefinition Width="1*"/>
-                    <ColumnDefinition Width="40"/>
-                </Grid.ColumnDefinitions>
-                <TextBox Grid.Column="1" x:Name="KeywordTextBox"
-                         FontSize="20" Padding="5"
-                         KeyUp="KeywordTextBoxKeyUp"/>
-                <Image Grid.Column="2" Source="/Image/SearchMusic.png" 
-                       MouseLeftButtonUp="SearchMusicImageMouseUp"/>
-            </Grid>
+            <Border Grid.Column="1"
+                    x:Name="searchBarBorder"
+                    CornerRadius="15"
+                    BorderThickness="5" 
+                    BorderBrush="Red">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition Width="1*"/>
+                        <ColumnDefinition Width="40"/>
+                    </Grid.ColumnDefinitions>
+                    <Border Margin="-5" BorderThickness="0"
+                            x:Name="youtubeLogoBorder"
+                            CornerRadius="18"
+                            BorderBrush="Red" Background="Red">
+                        <Image Margin="5" 
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               Source="/Image/Triangle.png"/>
+                    </Border>
+                    <TextBox Grid.Column="1" x:Name="KeywordTextBox"
+                             BorderThickness="0"
+                             Margin="10, 0, 0, 1"
+                             FontSize="20" Padding="0, 2, 0, 0"
+                             KeyUp="KeywordTextBoxKeyUp"/>
+                    <Image Grid.Column="2" Source="/Image/SearchMusic.png"
+                           x:Name="youtubeSearchImage"
+                           MouseEnter="ImageMouseEnter"
+                           MouseLeave="ImageMouseLeave"
+                           RenderOptions.BitmapScalingMode="HighQuality"
+                           MouseLeftButtonUp="SearchMusicImageMouseUp"/>
+                </Grid>   
+            </Border>
+            
             <Grid Grid.Column="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="1*"/>
                     <ColumnDefinition Width="40"/>
+                    <ColumnDefinition Width="10"/>
                 </Grid.ColumnDefinitions>
-                <Border Grid.Column="1" MouseEnter="ImageMouseEnter"
-                        MouseLeave="ImageMouseLeave">
-                    <Image Source="/Image/List.png"
-                        Margin="7"
-                        MouseLeftButtonUp="MusicListImageMouseUp"/>   
-                </Border>
+                <Image Source="/Image/List.png"
+                       Grid.Column="1"
+                       Margin="0"
+                       x:Name="listImage"
+                       MouseEnter="ImageMouseEnter"
+                       MouseLeave="ImageMouseLeave"
+                       RenderOptions.BitmapScalingMode="HighQuality"
+                       MouseLeftButtonUp="MusicListImageMouseUp"/>   
             </Grid>
         </Grid>
         <ListBox PreviewMouseDoubleClick="YoutubeItemDoubleClick" 
