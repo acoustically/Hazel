@@ -51,6 +51,19 @@
                    MouseLeave="ImageMouseLeave"
                    Margin="5" RenderOptions.BitmapScalingMode="HighQuality"
                    MouseDown="PlayBackImageMouseDown"/>
+            <Image Grid.Column="0" Source="/Image/Loop.png"
+                   x:Name="loopImage"
+                   MouseEnter="ImageMouseEnter"
+                   MouseLeave="ImageMouseLeave"
+                   Margin="12, 12, -30, 12" RenderOptions.BitmapScalingMode="HighQuality"
+                   MouseDown="LoopImageMouseDown"/>
+            <Image Grid.Column="4" Source="/Image/UnRandom.png"
+                   MouseEnter="ImageMouseEnter"
+                   MouseLeave="ImageMouseLeave"
+                   x:Name="randomImage"
+                   Margin="-25, 25, 25, 25" RenderOptions.BitmapScalingMode="HighQuality"
+                   MouseDown="RandomImageMouseDown"/>
+            
         </Grid>
     </Grid>
 </UserControl>

@@ -20,7 +20,7 @@
             <Border Grid.Column="1"
                     x:Name="searchBarBorder"
                     CornerRadius="15"
-                    BorderThickness="5" 
+                    BorderThickness="3" 
                     BorderBrush="Red">
                 <Grid>
                     <Grid.ColumnDefinitions>
@@ -28,7 +28,7 @@
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <Border Margin="-5" BorderThickness="0"
+                    <Border Margin="-3" BorderThickness="0"
                             x:Name="youtubeLogoBorder"
                             CornerRadius="18"
                             BorderBrush="Red" Background="Red">
@@ -38,7 +38,7 @@
                     </Border>
                     <TextBox Grid.Column="1" x:Name="KeywordTextBox"
                              BorderThickness="0"
-                             Margin="10, 0, 0, 1"
+                             Margin="10, 2, 0, 1"
                              FontSize="20" Padding="0, 2, 0, 0"
                              KeyUp="KeywordTextBoxKeyUp"/>
                     <Image Grid.Column="2" Source="/Image/SearchMusic.png"

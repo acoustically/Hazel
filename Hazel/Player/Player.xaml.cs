@@ -26,12 +26,16 @@ namespace Hazel.Player
     /// Player.xaml에 대한 상호 작용 논리
     /// </summary>
     
-    enum State { Stoped, Running, NotInit }
+    enum State { Stopped, Running, NotInit, Paused }
+    enum LoopState { NotLoop, LoopAll, LoopOne }
+    enum RandomState { Random, UnRandom }
 
     public partial class Player : UserControl
     {
         private WaveOutEvent player;
         private State state;
+        private LoopState loopState;
+        private RandomState randomState;
         private YoutubeSearchItem currentMusic;
         private WaveChannel32 volumeStream;
 
@@ -39,6 +43,7 @@ namespace Hazel.Player
         {
             InitializeComponent();
             state = State.NotInit;
+            loopState = LoopState.NotLoop;
             player = new WaveOutEvent();
         }
 
@@ -59,13 +64,20 @@ namespace Hazel.Player
             {
                 int index = PlayList.List.IndexOf(currentMusic);
                 int nextIndex;
-                if (index + 1 < PlayList.Count)
+                if (loopState == LoopState.LoopOne)
                 {
-                    nextIndex = index + 1;
+                    nextIndex = index;
                 }
                 else
                 {
-                    nextIndex = 0;
+                    if (index + 1 < PlayList.Count)
+                    {
+                        nextIndex = index + 1;
+                    }
+                    else
+                    {
+                        nextIndex = 0;
+                    }
                 }
                 return PlayList.List[nextIndex];
             }
@@ -91,9 +103,21 @@ namespace Hazel.Player
 
         private void PlaybackStopped(object sender, StoppedEventArgs e)
         {
-            CurrentMusic = NextMusic;
-            Debug.WriteLine("test");
-            Debug.WriteLine(CurrentMusic);
+            if(loopState == LoopState.NotLoop)
+            {
+                int index = PlayList.List.IndexOf(currentMusic);
+                if(index + 1 == PlayList.List.Count)
+                {
+                    playOrStopImage.Source 
+                        = new BitmapImage(new Uri(@"\image\PlayButton.png", UriKind.Relative));
+                    player.Stop();
+                    state = State.Stopped;
+                }
+            }
+            else
+            {
+                CurrentMusic = NextMusic;
+            }
         }
 
         private void SetPlayer()
@@ -123,7 +147,7 @@ namespace Hazel.Player
         private void Pause()
         {
             player.Pause();
-            state = State.Stoped;
+            state = State.Paused;
             playOrStopImage.Source = new BitmapImage(new Uri(@"\image\PlayButton.png", UriKind.Relative));
         }
         private void PlayOrStopImageMouseDown(object sender, MouseButtonEventArgs e)
@@ -135,6 +159,10 @@ namespace Hazel.Player
             else if(state == State.Running)
             {
                 Pause();
+            }
+            else if(state == State.Stopped)
+            {
+                CurrentMusic = currentMusic;
             }
             else
             {
@@ -204,6 +232,41 @@ namespace Hazel.Player
                 }
             });
             thread.Start();
+        }
+
+        private void LoopImageMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(loopState == LoopState.NotLoop)
+            {
+                loopState = LoopState.LoopAll;
+                loopImage.Source = new BitmapImage(new Uri(@"\Image\LoopAll.png", UriKind.Relative));
+            }
+            else if(loopState == LoopState.LoopAll)
+            {
+                loopState = LoopState.LoopOne;
+                loopImage.Source = new BitmapImage(new Uri(@"\Image\LoopOne.png", UriKind.Relative));
+            }
+            else
+            {
+                loopState = LoopState.NotLoop;
+                loopImage.Source = new BitmapImage(new Uri(@"\Image\Loop.png", UriKind.Relative));
+            }
+        }
+
+        private void RandomImageMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            if(randomState == RandomState.Random)
+            {
+                randomState = RandomState.UnRandom;
+                randomImage.Source 
+                    = new BitmapImage(new Uri(@"\Image\UnRandom.png", UriKind.Relative));
+            }
+            else
+            {
+                randomState = RandomState.Random;
+                randomImage.Source
+                    = new BitmapImage(new Uri(@"\Image\Random.png", UriKind.Relative));
+            }
         }
     }
 }

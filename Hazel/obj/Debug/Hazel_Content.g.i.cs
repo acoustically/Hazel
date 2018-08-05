@@ -8,6 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/listenter.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/random.png")]
+[assembly: System.Windows.Resources.AssemblyAssociatedContentFileAttribute("image/unrandom.png")]
 
 

@@ -183,5 +183,14 @@
   <ItemGroup>
     <Resource Include="Image\ListEnter.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Loop.png" />
+    <Resource Include="Image\LoopAll.png" />
+    <Resource Include="Image\LoopOne.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Random.png" />
+    <Resource Include="Image\UnRandom.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
