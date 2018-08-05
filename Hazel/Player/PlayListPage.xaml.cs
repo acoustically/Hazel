@@ -43,14 +43,26 @@ namespace Hazel.Player
         {
             try {
                 ListBoxItem item = ItemsControl.ContainerFromElement(sender as ListBox, e.OriginalSource as DependencyObject) as ListBoxItem;
+                YoutubeSearchItem music = item.Content as YoutubeSearchItem;
                 YoutubeSearchItem currentMusic = item.Content as YoutubeSearchItem;
                 DataEventArgs args = new DataEventArgs();
                 args.Data1 = currentMusic;
                 playListDoubleClick?.Invoke(this, args);
-            } catch (Exception)
+                setListBackground(music);
+            } catch (Exception ex)
             {
-                
+                Debug.WriteLine(ex);
             }
+        }
+
+        private void setListBackground(YoutubeSearchItem selectedItem)
+        {
+            foreach(YoutubeSearchItem item in PlayList.List)
+            {
+                item.Background = new SolidColorBrush(Color.FromRgb(245, 245, 245));
+            }
+            selectedItem.Background = new SolidColorBrush(Color.FromRgb(255, 241, 236));
+            PlayListBox.Items.Refresh();
         }
 
         private void IconMouseEnter(object sender, MouseEventArgs e)

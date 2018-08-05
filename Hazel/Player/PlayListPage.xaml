@@ -6,7 +6,7 @@
              xmlns:local="clr-namespace:Hazel.Player"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="900">
-    <Grid>
+    <Grid Background="#EEEEEE">
         <Grid.RowDefinitions>
             <RowDefinition Height="40"/>
             <RowDefinition Height="1*"/>
@@ -21,6 +21,7 @@
             </Grid.ColumnDefinitions>
             <Border x:Name="searchTextBoxBorder"
                     Grid.Column="1"
+                    Background="White"
                     BorderBrush="DimGray"
                     CornerRadius="15"
                     BorderThickness="3">
@@ -55,10 +56,15 @@
                    RenderOptions.BitmapScalingMode="HighQuality" />
         </Grid>
         <ListBox PreviewMouseDoubleClick="PlayListDoubleClick" 
+                 ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                 Background="#EEEEEE"
+                 BorderThickness="0"
                  x:Name="PlayListBox" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="90" Width="{Binding ActualWidth, ElementName=PlayListBox}">
+                    <Grid Height="90" 
+                          Background="{Binding Background}"
+                          Width="{Binding ActualWidth, ElementName=PlayListBox}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="1*"/>

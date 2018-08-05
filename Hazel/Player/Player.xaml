@@ -4,9 +4,12 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:Hazel.Player"
-             mc:Ignorable="d" 
+             mc:Ignorable="d"
              d:DesignHeight="800" d:DesignWidth="500">
-    <Grid Background="#BBBBBB">
+    <Grid>
+        <Grid.Background>
+            <SolidColorBrush Opacity="0.7" Color="#BBBBBB"/>
+        </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="70"/>
@@ -19,15 +22,17 @@
                 <RowDefinition Height="280"/>
                 <RowDefinition Height="1*"/>
             </Grid.RowDefinitions>
-            <Image Grid.Row="1" x:Name="PlayerThumbnail" 
+            <Image Grid.Row="1" x:Name="PlayerThumbnail"
+                   Opacity="0.8"
                    Stretch="UniformToFill" 
                    VerticalAlignment="Center" 
                    RenderOptions.BitmapScalingMode="HighQuality"/>
         </Grid>
         <Grid Grid.Row="1">
-            <local:TrackBar x:Name="playTimeTrackBar" positionChanged="TrackBarPositionChanged"/>
+            <local:TrackBar x:Name="playTimeTrackBar"
+                            positionChanged="TrackBarPositionChanged"/>
         </Grid>
-        <Grid Grid.Row="2" Background="#BBBBBB">
+        <Grid Grid.Row="2">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

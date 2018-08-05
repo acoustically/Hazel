@@ -10,8 +10,12 @@
         Height="800" Width="1400"
         ResizeMode="CanResizeWithGrip"
         WindowStartupLocation="CenterScreen"
-        WindowStyle="None" 
+        WindowStyle="None" AllowsTransparency="True"
+        Loaded="WindowLoaded"
         Title="MainWindow" MinHeight="800" MinWidth="1400">
+    <Window.Background>
+        <SolidColorBrush Opacity="0" Color="#BBBBBB"/>
+    </Window.Background>
     <WindowChrome.WindowChrome>
         <WindowChrome CaptionHeight="0"/>
     </WindowChrome.WindowChrome>

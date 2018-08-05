@@ -6,6 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace Hazel.Player
 {
@@ -16,6 +17,7 @@ namespace Hazel.Player
         private String title;
         private String channel;
         private String thumbnail;
+        private SolidColorBrush background;
 
         public YoutubeSearchItem(string videoId, string title, string channel, string thumbnail)
         {
@@ -23,7 +25,15 @@ namespace Hazel.Player
             this.title = title;
             this.channel = channel;
             this.thumbnail = thumbnail;
+            this.background = new SolidColorBrush(Color.FromRgb(245, 245, 245));
         }
+
+        public SolidColorBrush Background
+        {
+            get => this.background;
+            set => this.background = value;
+        }
+
         public String WatchUrl
         {
             get => "https://www.youtube.com/watch?v=" + this.videoId;
