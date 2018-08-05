@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json.Linq;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;
@@ -55,7 +56,16 @@ namespace Hazel.Player
 
         public override String ToString()
         {
-            return "videoId = " + videoId + " / title = " + title + " / channel = " + channel + " / thumbnail = " + thumbnail;
+            return ToJson().ToString();
+        }
+        public JObject ToJson()
+        {
+            JObject json = new JObject();
+            json.Add("videoId", videoId);
+            json.Add("title", title);
+            json.Add("channel", channel);
+            json.Add("thumbnail", thumbnail);
+            return json;
         }
     }
 }

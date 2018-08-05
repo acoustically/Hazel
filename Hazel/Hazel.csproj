@@ -192,5 +192,9 @@
     <Resource Include="Image\Random.png" />
     <Resource Include="Image\UnRandom.png" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Trash.png" />
+    <Resource Include="Image\TrashEnter.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -90,6 +91,21 @@ namespace Hazel.Player
         private void SearchTextBoxLostFocus(object sender, RoutedEventArgs e)
         {
             searchTextBoxBorder.BorderBrush = new SolidColorBrush(Colors.DimGray);
+        }
+
+        private void TrashImageMouseDown(object sender, MouseButtonEventArgs e)
+        {
+            Image image = sender as Image;
+            YoutubeSearchItem item = image.DataContext as YoutubeSearchItem;
+            if(Player.currentMusic != item)
+            {
+                PlayList.List.Remove(item);
+                PlayList.Save();
+            }
+            else
+            {
+                MessageBox.Show("현재 재생중인 곡입니다.");
+            }
         }
     }
 }

@@ -8,6 +8,8 @@
              d:DesignHeight="50" d:DesignWidth="500">
     <Grid VerticalAlignment="Center"
           Background="#00000000"
+          MouseEnter="TrackBarMouseEnter"
+          MouseLeave="TrackBarMouseLeave"
           MouseDown="LineMouseDown">
         <Grid.RowDefinitions>
             <RowDefinition Height="30"/>

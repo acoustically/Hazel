@@ -30,6 +30,19 @@ namespace Hazel.Player
                 list.Add(item);
             }
         }
+        public static void removeItem(YoutubeSearchItem item)
+        {
+            lock (_syncLock)
+            {
+                list.Remove(item);
+                order.Clear();
+                for(int i = 0; i < list.Count; i++)
+                {
+                    order.Add(i);
+                }
+                Shuffle();
+            }
+        }
         private static void Shuffle(int time = 1)
         {
             for(int t = 0; t < time; t++) {

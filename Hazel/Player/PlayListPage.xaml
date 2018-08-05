@@ -58,16 +58,34 @@
                  x:Name="PlayListBox" Grid.Row="1">
             <ListBox.ItemTemplate>
                 <DataTemplate>
-                    <Grid Height="90">
+                    <Grid Height="90" Width="{Binding ActualWidth, ElementName=PlayListBox}">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="160"/>
                             <ColumnDefinition Width="1*"/>
+                            <ColumnDefinition Width="90"/>
                         </Grid.ColumnDefinitions>
                         <Image Grid.Column="0" Stretch="UniformToFill" 
                                VerticalAlignment="Center" 
                                RenderOptions.BitmapScalingMode="HighQuality" 
                                Source="{Binding Thumbnail}" />
                         <TextBlock Grid.Column="1" Text="{Binding Title}"/>
+                        <Image Grid.Column="3" 
+                               Margin="25"
+                               RenderOptions.BitmapScalingMode="HighQuality"
+                               MouseDown="TrashImageMouseDown">
+                            <Image.Style>
+                                <Style TargetType="{x:Type Image}">
+                                    <Setter Property="Source" Value="\Image\Trash.png"/>
+                                    <Style.Triggers>
+                                        <Trigger Property="IsMouseOver" Value="True">
+                                            <Setter Property="Source"
+                                                    Value="\Image\TrashEnter.png"/>
+                                            <Setter Property="Cursor" Value="Hand"/>
+                                        </Trigger>
+                                    </Style.Triggers>
+                                </Style>
+                            </Image.Style>
+                        </Image>
                     </Grid>
                 </DataTemplate>   
             </ListBox.ItemTemplate>

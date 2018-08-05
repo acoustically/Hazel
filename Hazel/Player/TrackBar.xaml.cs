@@ -126,5 +126,15 @@ namespace Hazel.Player
             String seconds = time.Seconds.ToString(format);
             return hours + ":" + minutes + ":" + seconds;
         }
+
+        private void TrackBarMouseEnter(object sender, MouseEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Hand;
+        }
+
+        private void TrackBarMouseLeave(object sender, MouseEventArgs e)
+        {
+            Mouse.OverrideCursor = Cursors.Arrow;
+        }
     }
 }
