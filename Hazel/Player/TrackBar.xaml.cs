@@ -120,7 +120,11 @@ namespace Hazel.Player
 
         private String TimeSpanToText(TimeSpan time)
         {
-            return time.Hours + ":" + time.Minutes + ":" + time.Seconds;
+            String format = "00";
+            String hours = time.Hours.ToString(format);
+            String minutes = time.Minutes.ToString(format);
+            String seconds = time.Seconds.ToString(format);
+            return hours + ":" + minutes + ":" + seconds;
         }
     }
 }
