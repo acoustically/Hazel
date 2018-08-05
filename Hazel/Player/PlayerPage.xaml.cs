@@ -22,7 +22,6 @@ namespace Hazel.Player
     /// </summary>
     public partial class PlayerPage : Page
     {
-        private bool isTitleBarCliked = false;
         private Point currentPosition = new Point();
         public PlayerPage()
         {
@@ -68,7 +67,6 @@ namespace Hazel.Player
 
         private void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
         {
-            isTitleBarCliked = true;
             currentPosition = PointToScreen(e.GetPosition(this));
             MainWindow window = Application.Current.MainWindow as MainWindow;
             window.DragMove();

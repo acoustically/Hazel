@@ -30,3 +30,5 @@ D:\Home\Hazel\Hazel\Hazel\bin\Debug\MsieJavaScriptEngine.xml
 D:\Home\Hazel\Hazel\Hazel\bin\Debug\ru-ru\MsieJavaScriptEngine.resources.dll
 D:\Home\Hazel\Hazel\Hazel\bin\Debug\NAudio.dll
 D:\Home\Hazel\Hazel\Hazel\bin\Debug\NAudio.xml
+D:\Home\Hazel\Hazel\Hazel\obj\Debug\Player\TrackBar.g.cs
+D:\Home\Hazel\Hazel\Hazel\obj\Debug\Player\TrackBar.baml

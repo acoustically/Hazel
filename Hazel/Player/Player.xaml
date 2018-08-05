@@ -6,11 +6,12 @@
              xmlns:local="clr-namespace:Hazel.Player"
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="500">
-    <Grid Background="#111111">
+    <Grid Background="#BBBBBB">
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
+            <RowDefinition Height="50"/>
         </Grid.RowDefinitions>
         <Grid Grid.Row="0">
             <Grid.RowDefinitions>
@@ -23,8 +24,10 @@
                    VerticalAlignment="Center" 
                    RenderOptions.BitmapScalingMode="HighQuality"/>
         </Grid>
-        <Grid Grid.Row="1" Background="DarkGray"/>
-        <Grid Grid.Row="2" Background="Beige">
+        <Grid Grid.Row="1">
+            <local:TrackBar x:Name="playTimeTrackBar" positionChanged="TrackBarPositionChanged"/>
+        </Grid>
+        <Grid Grid.Row="2" Background="#BBBBBB">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>
@@ -33,13 +36,19 @@
                 <ColumnDefinition/>
             </Grid.ColumnDefinitions>
             <Image Grid.Column="2" x:Name="playOrStopImage" 
+                   MouseEnter="ImageMouseEnter"
+                   MouseLeave="ImageMouseLeave"
                    Source="/Image/PlayButton.png" 
                    RenderOptions.BitmapScalingMode="HighQuality" 
                    MouseDown="PlayOrStopImageMouseDown"/>
             <Image Grid.Column="3" Source="/Image/PlayNext.png" 
+                   MouseEnter="ImageMouseEnter"
+                   MouseLeave="ImageMouseLeave"
                    Margin="5" RenderOptions.BitmapScalingMode="HighQuality"
                    MouseDown="PlayNextImageMouseDown"/>
-            <Image Grid.Column="1" Source="/Image/PlayBack.png" 
+            <Image Grid.Column="1" Source="/Image/PlayBack.png"
+                   MouseEnter="ImageMouseEnter"
+                   MouseLeave="ImageMouseLeave"
                    Margin="5" RenderOptions.BitmapScalingMode="HighQuality"
                    MouseDown="PlayBackImageMouseDown"/>
         </Grid>
