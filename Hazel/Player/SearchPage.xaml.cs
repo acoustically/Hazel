@@ -112,7 +112,7 @@ namespace Hazel.Player
             else
             {
                 image.Source 
-                    = new BitmapImage(new Uri(@"\Image\YoutubeSearchMusicEnter.png"
+                    = new BitmapImage(new Uri(@"\Image\SearchMusicEnter.png"
                         , UriKind.Relative));
             }
             Mouse.OverrideCursor = Cursors.Hand;
@@ -133,6 +133,16 @@ namespace Hazel.Player
                         , UriKind.Relative));
             }
             Mouse.OverrideCursor = Cursors.Arrow;
+        }
+
+        private void KeywordTextBoxGotFocus(object sender, RoutedEventArgs e)
+        {
+            searchBarBorder.BorderBrush = new SolidColorBrush(Colors.OrangeRed);
+        }
+
+        private void KeywordTextBoxLostFocus(object sender, RoutedEventArgs e)
+        {
+            searchBarBorder.BorderBrush = new SolidColorBrush(Colors.DimGray);
         }
     }
 }

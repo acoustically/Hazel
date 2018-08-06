@@ -15,7 +15,7 @@ namespace Hazel.Player
     static class PlayList
     {
         private static ObservableCollection<YoutubeSearchItem> list = new ObservableCollection<YoutubeSearchItem>();
-        private static List<int> order = new List<int>();
+        private static ObservableCollection<YoutubeSearchItem> randomList = new ObservableCollection<YoutubeSearchItem>();
         private static object _syncLock = new object();
         static void sync()
         {
@@ -25,9 +25,9 @@ namespace Hazel.Player
         {
             lock (_syncLock)
             {
-                order.Add(list.Count);
                 Shuffle();
                 list.Add(item);
+                randomList.Add(item);
             }
         }
         public static void removeItem(YoutubeSearchItem item)
@@ -35,24 +35,27 @@ namespace Hazel.Player
             lock (_syncLock)
             {
                 list.Remove(item);
-                order.Clear();
-                for(int i = 0; i < list.Count; i++)
-                {
-                    order.Add(i);
-                }
                 Shuffle();
             }
+        }
+        public static void randomSwap(YoutubeSearchItem item)
+        {
+            Shuffle();
+            int index = randomList.IndexOf(item);
+            YoutubeSearchItem temp = randomList[index];
+            randomList[index] = randomList[0];
+            randomList[0] = temp;
         }
         private static void Shuffle(int time = 1)
         {
             for(int t = 0; t < time; t++) {
-                for(int i = 0; i < order.Count; i++)
+                for(int i = 0; i < randomList.Count; i++)
                 {
                     Random random = new Random();
-                    int index = random.Next(0, order.Count);
-                    int temp = order[i];
-                    order[i] = order[index];
-                    order[index] = temp;
+                    int index = random.Next(0, randomList.Count);
+                    YoutubeSearchItem temp = randomList[i];
+                    randomList[i] = randomList[index];
+                    randomList[index] = temp;
                 }
             }
            
@@ -67,12 +70,10 @@ namespace Hazel.Player
         {
             get => list;
         }
-
-        public static List<int> Order
+        public static ObservableCollection<YoutubeSearchItem> RandomList
         {
-            get => order;
+            get => randomList;
         }
-
         public static void Load()
         {
             sync();

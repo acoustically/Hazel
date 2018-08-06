@@ -36,6 +36,7 @@ namespace Hazel.Player
         private States state;
         private LoopStates loopState;
         private RandomStates randomState;
+        private float volume = 0.5f;
         public static YoutubeSearchItem currentMusic;
         private WaveChannel32 volumeStream;
 
@@ -53,6 +54,7 @@ namespace Hazel.Player
             json.Add("loopState", (int)loopState);
             json.Add("randomState", (int)randomState);
             json.Add("index", PlayList.List.IndexOf(currentMusic));
+            json.Add("volume", volume);
             String state = json.ToString();
             Preference.isStateFileExist();
             File.WriteAllText(Preference.stateFilePath, state);
@@ -71,9 +73,13 @@ namespace Hazel.Player
                         LoopState = (LoopStates)int.Parse(json["loopState"].ToString());
                         RandomState = (RandomStates)int.Parse(json["randomState"].ToString());
                         int index = int.Parse(json["index"].ToString());
+                        volume = float.Parse(json["volume"].ToString());
+                        volumeTrackBar.SetPosition(volume * 100);
                         YoutubeSearchItem music = PlayList.List[index];
                         currentMusic = music;
                         PlayerThumbnail.Source = new BitmapImage(new Uri(currentMusic.Thumbnail));
+                        titleTextBlock.Text = currentMusic.Title;
+                        PlayList.randomSwap(currentMusic);
                         state = States.Stopped;
                     }
                     catch (Exception ex)
@@ -145,8 +151,16 @@ namespace Hazel.Player
         {
             get
             {
-                int index = PlayList.List.IndexOf(currentMusic);
+                int index;
                 int nextIndex;
+                if(randomState == RandomStates.UnRandom)
+                {
+                    index = PlayList.List.IndexOf(currentMusic);
+                }
+                else
+                {
+                    index = PlayList.RandomList.IndexOf(currentMusic);
+                }
                 if (loopState == LoopStates.LoopOne)
                 {
                     nextIndex = index;
@@ -162,7 +176,14 @@ namespace Hazel.Player
                         nextIndex = 0;
                     }
                 }
-                return PlayList.List[nextIndex];
+                if(randomState == RandomStates.UnRandom)
+                {
+                    return PlayList.List[nextIndex];
+                }
+                else
+                {
+                    return PlayList.RandomList[nextIndex];
+                }
             }
         }
 
@@ -172,7 +193,11 @@ namespace Hazel.Player
             {
                 int index = PlayList.List.IndexOf(currentMusic);
                 int previousIndex;
-                if (index - 1 >= 0)
+                if(volumeStream.CurrentTime.TotalSeconds >= 3)
+                {
+                    previousIndex = index;
+                }
+                else if (index - 1 >= 0)
                 {
                     previousIndex = index - 1;
                 }
@@ -188,13 +213,26 @@ namespace Hazel.Player
         {
             if(loopState == LoopStates.NotLoop)
             {
-                int index = PlayList.List.IndexOf(currentMusic);
+                Debug.WriteLine("test");
+                int index;
+                if(randomState == RandomStates.UnRandom)
+                {
+                    index = PlayList.List.IndexOf(currentMusic);
+                }
+                else
+                {
+                    index = PlayList.RandomList.IndexOf(currentMusic);
+                }
                 if(index + 1 == PlayList.List.Count)
                 {
                     playOrStopImage.Source 
                         = new BitmapImage(new Uri(@"\image\PlayButton.png", UriKind.Relative));
                     player.Stop();
                     state = States.Stopped;
+                }
+                else
+                {
+                    CurrentMusic = NextMusic;
                 }
             }
             else
@@ -211,6 +249,7 @@ namespace Hazel.Player
                 player.Stop();
             }
             PlayerThumbnail.Source = new BitmapImage(new Uri(currentMusic.Thumbnail));
+            titleTextBlock.Text = currentMusic.Title;
             JObject audioFmt = Youtube.getAudioFmt(currentMusic.WatchUrl);
             MediaFoundationReader outputStream 
                 = new MediaFoundationReader(audioFmt["url"].ToString());
@@ -220,6 +259,7 @@ namespace Hazel.Player
             player.Init(volumeStream);
             setTrackBarPosition();
             SaveState();
+            volumeTrackBar.SetVolume(volume * 100);
         }
         
         private void Play()
@@ -256,7 +296,16 @@ namespace Hazel.Player
 
         private void PlayNextImageMouseDown(object sender, MouseButtonEventArgs e)
         {
-            CurrentMusic = NextMusic;
+            if(loopState == LoopStates.LoopOne)
+            {
+                loopState = LoopStates.LoopAll;
+                CurrentMusic = NextMusic;
+                loopState = LoopStates.LoopOne;
+            } else
+            {
+                CurrentMusic = NextMusic;
+            }
+
         }
 
         private void PlayBackImageMouseDown(object sender, MouseButtonEventArgs e)
@@ -302,7 +351,7 @@ namespace Hazel.Player
                         break;
                     double ratio = currentTime / totalTime;
                     double pinPosition = ratio * (playTimeTrackBar.Max - playTimeTrackBar.Min);
-                    playTimeTrackBar.Dispatcher.Invoke(new Action(() =>
+                   playTimeTrackBar.Dispatcher.Invoke(new Action(() =>
                     {
                         if(!playTimeTrackBar.pinCliked)
                             playTimeTrackBar.setPosition(new Point(pinPosition, 0));
@@ -341,8 +390,18 @@ namespace Hazel.Player
             else if(randomState == RandomStates.UnRandom)
             {
                 RandomState = RandomStates.Random;
+                PlayList.randomSwap(currentMusic);
             }
             SaveState();
+        }
+
+        private void VolumeChanged(object sender, EventArgs e)
+        {
+            DataEventArgs dataArgs = e as DataEventArgs;
+            double MAX = (double)dataArgs.Data2;
+            float volume = (float)((double)dataArgs.Data1 / MAX);
+            volumeStream.Volume = volume;
+            this.volume = volume;
         }
     }
 }

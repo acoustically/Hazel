@@ -67,6 +67,9 @@
     <Compile Include="Player\TrackBar.xaml.cs">
       <DependentUpon>TrackBar.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Player\VolumeTrackBar.xaml.cs">
+      <DependentUpon>VolumeTrackBar.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Youtube.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -103,6 +106,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Player\TrackBar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Player\VolumeTrackBar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -195,6 +202,9 @@
   <ItemGroup>
     <Resource Include="Image\Trash.png" />
     <Resource Include="Image\TrashEnter.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Image\Volume.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -22,7 +22,6 @@ namespace Hazel.Player
     /// </summary>
     public partial class PlayerPage : Page
     {
-        private Point currentPosition = new Point();
         public PlayerPage()
         {
             InitializeComponent();
@@ -62,12 +61,11 @@ namespace Hazel.Player
 
         private void WindowCloseImageMouseLeave(object sender, MouseEventArgs e)
         {
-            windowCloseImage.Background = new SolidColorBrush(Colors.White);
+            windowCloseImage.Background = new SolidColorBrush(Color.FromRgb(239, 239, 239));
         }
 
         private void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
         {
-            currentPosition = PointToScreen(e.GetPosition(this));
             MainWindow window = Application.Current.MainWindow as MainWindow;
             window.DragMove();
         }

@@ -19,34 +19,6 @@
                 <ColumnDefinition Width="40"/>
                 <ColumnDefinition Width="20"/>
             </Grid.ColumnDefinitions>
-            <Border x:Name="searchTextBoxBorder"
-                    Grid.Column="1"
-                    Background="White"
-                    BorderBrush="DimGray"
-                    CornerRadius="15"
-                    BorderThickness="3">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="1*"/>
-                        <ColumnDefinition Width="40"/>
-                    </Grid.ColumnDefinitions>
-                    <TextBox Grid.Column="0"
-                             BorderThickness="0"
-                             x:Name="searchTextBox"
-                             FontSize="20"
-                             Padding="5"
-                             GotFocus="SearchTextBoxGotFocus"
-                             LostFocus="SearchTextBoxLostFocus"
-                             Margin="10, 0, 0, 1"/>
-                    <Image Grid.Column="1"
-                           x:Name="searchMusicImage"
-                           MouseEnter="IconMouseEnter"
-                           MouseLeave="IconMouseLeave"
-                           Source="/Image/SearchMusic.png"
-                           Margin="2"
-                           RenderOptions.BitmapScalingMode="HighQuality" />
-                </Grid>
-            </Border>
             <Image Source="/Image/AddMusic.png" 
                    Grid.Column="3"
                    x:Name="addMusicImage"
@@ -74,7 +46,7 @@
                                VerticalAlignment="Center" 
                                RenderOptions.BitmapScalingMode="HighQuality" 
                                Source="{Binding Thumbnail}" />
-                        <TextBlock Grid.Column="1" Text="{Binding Title}"/>
+                        <TextBlock TextAlignment="Center" VerticalAlignment="Center" Grid.Column="1" Text="{Binding Title}"/>
                         <Image Grid.Column="3" 
                                Margin="25"
                                RenderOptions.BitmapScalingMode="HighQuality"

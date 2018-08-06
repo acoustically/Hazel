@@ -22,27 +22,20 @@
                     CornerRadius="15"
                     Background="White"
                     BorderThickness="3" 
-                    BorderBrush="Red">
+                    BorderBrush="DimGray">
                 <Grid>
                     <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="50"/>
                         <ColumnDefinition Width="1*"/>
                         <ColumnDefinition Width="40"/>
                     </Grid.ColumnDefinitions>
-                    <Border Margin="-3" BorderThickness="0"
-                            x:Name="youtubeLogoBorder"
-                            CornerRadius="18"
-                            BorderBrush="Red" Background="Red">
-                        <Image Margin="5" 
-                               RenderOptions.BitmapScalingMode="HighQuality"
-                               Source="/Image/Triangle.png"/>
-                    </Border>
-                    <TextBox Grid.Column="1" x:Name="KeywordTextBox"
+                    <TextBox Grid.Column="0" x:Name="KeywordTextBox"
                              BorderThickness="0"
                              Margin="10, 2, 0, 1"
                              FontSize="20" Padding="0, 2, 0, 0"
+                             GotFocus="KeywordTextBoxGotFocus"
+                             LostFocus="KeywordTextBoxLostFocus"
                              KeyUp="KeywordTextBoxKeyUp"/>
-                    <Image Grid.Column="2" Source="/Image/SearchMusic.png"
+                    <Image Grid.Column="1" Source="/Image/SearchMusic.png"
                            x:Name="youtubeSearchImage"
                            MouseEnter="ImageMouseEnter"
                            MouseLeave="ImageMouseLeave"
@@ -75,7 +68,7 @@
             <ListBox.ItemTemplate>
                 <DataTemplate>
                     <Grid Height="168"
-                          Width="{Binding ActualWidth, ElementName=PlayListBox}"
+                          Width="{Binding ActualWidth, ElementName=youtubeSearchListBox}"
                           Background="#F5F5F5">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="300"/>

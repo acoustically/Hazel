@@ -12,6 +12,7 @@
         </Grid.Background>
         <Grid.RowDefinitions>
             <RowDefinition Height="5*"/>
+            <RowDefinition Height="30"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="70"/>
             <RowDefinition Height="50"/>
@@ -27,12 +28,26 @@
                    Stretch="UniformToFill" 
                    VerticalAlignment="Center" 
                    RenderOptions.BitmapScalingMode="HighQuality"/>
+            <TextBlock Grid.Row="2" VerticalAlignment="Center"
+                       x:Name="titleTextBlock"
+                       FontSize="15"
+                       TextWrapping="WrapWithOverflow"
+                       TextAlignment="Center" Foreground="White"/>
         </Grid>
         <Grid Grid.Row="1">
-            <local:TrackBar x:Name="playTimeTrackBar"
-                            positionChanged="TrackBarPositionChanged"/>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="1*"/>
+                <ColumnDefinition Width="auto"/>
+            </Grid.ColumnDefinitions>
+            <local:VolumeTrackBar Grid.Column="1"
+                                  x:Name="volumeTrackBar"
+                                  volumeChanged="VolumeChanged"/>
         </Grid>
         <Grid Grid.Row="2">
+            <local:TrackBar x:Name="playTimeTrackBar"
+                positionChanged="TrackBarPositionChanged"/>
+        </Grid>
+        <Grid Grid.Row="3">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition/>
                 <ColumnDefinition/>

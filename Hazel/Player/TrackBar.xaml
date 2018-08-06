@@ -21,7 +21,7 @@
             <Line X1="20" Y1="0"
                   X2="480" Y2="0"
                   StrokeThickness="2"
-                  Stroke="LightGray"/>
+                  Stroke="#DDDDDD"/>
             <Line x:Name="lineBorder"
                   X1="19" Y1="0"
                   X2="20" Y2="0"
