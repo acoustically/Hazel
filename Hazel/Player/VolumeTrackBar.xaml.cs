@@ -66,6 +66,15 @@ namespace Hazel.Player
 
         public void SetVolume(double pinPosition)
         {
+            pinPosition += MIN;
+            if(pinPosition < MIN)
+            {
+                pinPosition = MIN;
+            }
+            else if(pinPosition > MAX)
+            {
+                pinPosition = MAX;
+            }
             DataEventArgs args = new DataEventArgs();
             args.Data1 = pinPosition - MIN;
             args.Data2 = MAX - MIN;

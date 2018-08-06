@@ -397,11 +397,29 @@ namespace Hazel.Player
 
         private void VolumeChanged(object sender, EventArgs e)
         {
-            DataEventArgs dataArgs = e as DataEventArgs;
-            double MAX = (double)dataArgs.Data2;
-            float volume = (float)((double)dataArgs.Data1 / MAX);
-            volumeStream.Volume = volume;
-            this.volume = volume;
+            if(volumeStream != null)
+            {
+                DataEventArgs dataArgs = e as DataEventArgs;
+                double MAX = (double)dataArgs.Data2;
+                float volume = (float)((double)dataArgs.Data1 / MAX);
+                volumeStream.Volume = volume;
+                this.volume = volume;
+            }
+       }
+
+        private void PlayerMouseWheel(object sender, MouseWheelEventArgs e)
+        {
+            if(e.Delta < 0)
+            {
+                volume -= 0.05f;
+            }
+            else
+            {
+                volume += 0.05f;
+            }
+            Debug.WriteLine(volume);
+            volumeTrackBar.SetPosition(volume * 100);
+            volumeTrackBar.SetVolume(volume * 100);
         }
     }
 }

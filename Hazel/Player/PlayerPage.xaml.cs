@@ -67,7 +67,10 @@ namespace Hazel.Player
         private void TitleBarMouseDown(object sender, MouseButtonEventArgs e)
         {
             MainWindow window = Application.Current.MainWindow as MainWindow;
-            window.DragMove();
+            if(window != null)
+            {
+                window.DragMove();
+            }
         }
     }
 }

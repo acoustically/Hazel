@@ -28,6 +28,7 @@
                 </Grid.ColumnDefinitions>
                 <TextBlock Grid.Column="0"/>
                 <Border x:Name="windowCloseImage" Grid.Column="3"
+                        Background="#EEEEEE"
                         RenderOptions.BitmapScalingMode="HighQuality"
                            MouseLeftButtonDown="WindowCloseImageMouseUp"
                            MouseEnter="WindowCloseImageMouseEnter"
