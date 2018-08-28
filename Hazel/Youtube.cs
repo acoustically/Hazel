@@ -8,9 +8,8 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Web;
-using MsieJavaScriptEngine;
-using MsieJavaScriptEngine.Helpers;
 using System.IO;
+using Jint;
 
 namespace Hazel
 {
@@ -133,14 +132,16 @@ namespace Hazel
             String signateKey = signateKeys[0].Split('.')[0];
             JObject signateFunctions = getSignateFunctions(baseJs, signateKey);
             String signature = s;
+            String javascript = "var a = '" + s + "'.split('');\n";
             foreach(String key in signateKeys)
             {
                 String[] keyParam = splitSignateKey(key);
                 String jsFunction = signateFunctions[keyParam[0]].ToString();
                 String param = keyParam[1];
-                signature = executeFunction(jsFunction, signature, int.Parse(param));
+                javascript += "(" + jsFunction + ")(a, "+ param +");\n";
             }
-            return signature;
+            javascript += "var signature = a.join('')";
+            return ExecuteJavascript(javascript);
         }
         private static String[] splitSignateKey(String signateKey)
         {
@@ -151,44 +152,10 @@ namespace Hazel
             String[] keyParam = { key, param };
             return keyParam;
         }
-        private static String Reverse(String str)
+
+        private static String ExecuteJavascript(String javascript)
         {
-            char[] charArray = str.ToCharArray();
-            Array.Reverse(charArray);
-            return new String(charArray);
-        }
-        private static String Splice(String str, int range)
-        {
-            List<char> chars = new List<char>();
-            chars.AddRange(str);
-            chars.RemoveRange(0, range);
-            return String.Join("", chars);
-        }
-        private static String Swap(String str, int param)
-        {
-            char[] charArray = str.ToCharArray();
-            int index = param % str.Length;
-            char c = charArray[0];
-            charArray[0] = charArray[index];
-            charArray[index] = c;
-            return new String(charArray);
-        }
-        private static String executeFunction(String jsFunction, String signature, int param)
-        {
-           
-            if(jsFunction.Contains("reverse"))
-            {
-                signature = Reverse(signature);
-            }
-            else if(jsFunction.Contains("splice"))
-            {
-                signature = Splice(signature, param);
-            } 
-            else
-            {
-                signature = Swap(signature, param);
-            }
-            return signature;
+            return new Engine().Execute(javascript).GetValue("signature").ToString();
         }
     }
 }

@@ -24,3 +24,10 @@ D:\Home\Hazel\Hazel\Hazel\obj\Release\Hazel.csproj.CoreCompileInputs.cache
 D:\Home\Hazel\Hazel\Hazel\obj\Release\Hazel.csproj.CopyComplete
 D:\Home\Hazel\Hazel\Hazel\obj\Release\Hazel.exe
 D:\Home\Hazel\Hazel\Hazel\obj\Release\Hazel.pdb
+D:\Home\Hazel\Hazel\Hazel\bin\Release\NAudio.dll
+D:\Home\Hazel\Hazel\Hazel\bin\Release\NAudio.xml
+D:\Home\Hazel\Hazel\Hazel\obj\Release\Player\TrackBar.g.cs
+D:\Home\Hazel\Hazel\Hazel\obj\Release\Player\VolumeTrackBar.g.cs
+D:\Home\Hazel\Hazel\Hazel\obj\Release\Player\TrackBar.baml
+D:\Home\Hazel\Hazel\Hazel\obj\Release\Player\VolumeTrackBar.baml
+D:\Home\Hazel\Hazel\Hazel\bin\Release\Jint.dll

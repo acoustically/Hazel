@@ -35,14 +35,18 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MsieJavaScriptEngine, Version=2.2.9.0, Culture=neutral, PublicKeyToken=a3a2846a37ac0d3e, processorArchitecture=MSIL">
-      <HintPath>..\packages\MsieJavaScriptEngine.2.2.9\lib\net45\MsieJavaScriptEngine.dll</HintPath>
+    <Reference Include="Jint, Version=0.0.0.0, Culture=neutral, PublicKeyToken=2e92ba9c8d81157f, processorArchitecture=MSIL">
+      <HintPath>..\packages\Jint.2.11.58\lib\net451\Jint.dll</HintPath>
     </Reference>
     <Reference Include="NAudio, Version=1.8.4.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\NAudio.1.8.4\lib\net35\NAudio.dll</HintPath>
     </Reference>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="Noesis.Javascript, Version=0.0.0.0, Culture=neutral, processorArchitecture=x86" Condition="'$(PlatformTarget)' == 'x86'">
+      <HintPath>..\packages\Noesis.Javascript.0.7.0.0\lib\net40\x86\Noesis.Javascript.dll</HintPath>
+      <Private>True</Private>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Data" />
@@ -64,6 +68,7 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="JsEngine.cs" />
     <Compile Include="Player\TrackBar.xaml.cs">
       <DependentUpon>TrackBar.xaml</DependentUpon>
     </Compile>
@@ -207,4 +212,11 @@
     <Resource Include="Image\Volume.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+  <PropertyGroup>
+    <PostBuildEvent>
+    if not exist "$(TargetDir)x86" md "$(TargetDir)x86"
+    xcopy /s /y "$(SolutionDir)packages\Noesis.Javascript.0.7.0.0\NativeBinaries\net40\x86\*.*" "$(TargetDir)x86"
+    if not exist "$(TargetDir)amd64" md "$(TargetDir)amd64"
+    xcopy /s /y "$(SolutionDir)packages\Noesis.Javascript.0.7.0.0\NativeBinaries\net40\amd64\*.*" "$(TargetDir)amd64"</PostBuildEvent>
+  </PropertyGroup>
 </Project>

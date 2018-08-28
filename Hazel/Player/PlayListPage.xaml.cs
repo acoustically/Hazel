@@ -23,11 +23,13 @@ namespace Hazel.Player
     {
         public event EventHandler addMusicImageClick;
         public event EventHandler playListDoubleClick;
+        public static ListBox playListBox;
 
         public PlayListPage()
         {
             InitializeComponent();
             PlayListBox.ItemsSource = PlayList.List;
+            playListBox = PlayListBox;
         }
 
         public void refreshPlayList()
@@ -47,22 +49,11 @@ namespace Hazel.Player
                 DataEventArgs args = new DataEventArgs();
                 args.Data1 = currentMusic;
                 playListDoubleClick?.Invoke(this, args);
-                setListBackground(currentMusic);
                 PlayList.randomSwap(currentMusic);
             } catch (Exception ex)
             {
                 Debug.WriteLine(ex);
             }
-        }
-
-        private void setListBackground(YoutubeSearchItem selectedItem)
-        {
-            foreach(YoutubeSearchItem item in PlayList.List)
-            {
-                item.Background = new SolidColorBrush(Color.FromRgb(245, 245, 245));
-            }
-            selectedItem.Background = new SolidColorBrush(Color.FromRgb(255, 241, 236));
-            PlayListBox.Items.Refresh();
         }
 
         private void IconMouseEnter(object sender, MouseEventArgs e)

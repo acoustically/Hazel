@@ -96,7 +96,6 @@ namespace Hazel.Player
                 } 
                 catch (Exception)
                 {
-                    MessageBox.Show("플레이 리스트를 불러올 수 없습니다.");
                 }
             }
         }

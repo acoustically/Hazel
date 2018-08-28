@@ -46,6 +46,7 @@ namespace Hazel.Player
             state = States.NotInit;
             LoadState();
             player = new WaveOutEvent();
+            volumeTrackBar.SetPosition(volume * 100);
         }
 
         private void SaveState()
@@ -74,7 +75,6 @@ namespace Hazel.Player
                         RandomState = (RandomStates)int.Parse(json["randomState"].ToString());
                         int index = int.Parse(json["index"].ToString());
                         volume = float.Parse(json["volume"].ToString());
-                        volumeTrackBar.SetPosition(volume * 100);
                         YoutubeSearchItem music = PlayList.List[index];
                         currentMusic = music;
                         PlayerThumbnail.Source = new BitmapImage(new Uri(currentMusic.Thumbnail));
@@ -144,7 +144,18 @@ namespace Hazel.Player
                 SetPlayer();
                 Play();
                 playTimeTrackBar.setPosition(new Point(0, 0));
+                setListBackground(currentMusic);
             }
+        }
+
+        private void setListBackground(YoutubeSearchItem selectedItem)
+        {
+            foreach(YoutubeSearchItem item in PlayList.List)
+            {
+                item.Background = new SolidColorBrush(Color.FromRgb(245, 245, 245));
+            }
+            selectedItem.Background = new SolidColorBrush(Color.FromRgb(255, 241, 236));
+            PlayListPage.playListBox.Items.Refresh();
         }
 
         public YoutubeSearchItem NextMusic
@@ -296,6 +307,8 @@ namespace Hazel.Player
 
         private void PlayNextImageMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if(state == States.NotInit)
+                return;
             if(loopState == LoopStates.LoopOne)
             {
                 loopState = LoopStates.LoopAll;
@@ -310,6 +323,8 @@ namespace Hazel.Player
 
         private void PlayBackImageMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if(state == States.NotInit)
+                return;
             CurrentMusic = PreviousMusic;
         }
 
@@ -351,7 +366,7 @@ namespace Hazel.Player
                         break;
                     double ratio = currentTime / totalTime;
                     double pinPosition = ratio * (playTimeTrackBar.Max - playTimeTrackBar.Min);
-                   playTimeTrackBar.Dispatcher.Invoke(new Action(() =>
+                    playTimeTrackBar.Dispatcher.Invoke(new Action(() =>
                     {
                         if(!playTimeTrackBar.pinCliked)
                             playTimeTrackBar.setPosition(new Point(pinPosition, 0));
@@ -366,6 +381,8 @@ namespace Hazel.Player
 
         private void LoopImageMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if(state == States.NotInit)
+                return;
             if(loopState == LoopStates.NotLoop)
             {
                 LoopState = LoopStates.LoopAll;
@@ -383,6 +400,8 @@ namespace Hazel.Player
 
         private void RandomImageMouseDown(object sender, MouseButtonEventArgs e)
         {
+            if(state == States.NotInit)
+                return;
             if(randomState == RandomStates.Random)
             {
                 RandomState = RandomStates.UnRandom;
@@ -397,6 +416,8 @@ namespace Hazel.Player
 
         private void VolumeChanged(object sender, EventArgs e)
         {
+            if(state == States.NotInit)
+                return;
             if(volumeStream != null)
             {
                 DataEventArgs dataArgs = e as DataEventArgs;
@@ -417,7 +438,6 @@ namespace Hazel.Player
             {
                 volume += 0.05f;
             }
-            Debug.WriteLine(volume);
             volumeTrackBar.SetPosition(volume * 100);
             volumeTrackBar.SetVolume(volume * 100);
         }
