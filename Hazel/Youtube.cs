@@ -96,7 +96,6 @@ namespace Hazel
             signateFucntionName = signateFucntionName.Split(')')[1];
             signateFucntionName = signateFucntionName.Substring(1, signateFucntionName.Length - 1);
             signateFucntionName = signateFucntionName.Substring(0, 2);
-            MessageBox.Show(signateFucntionName);
             return signateFucntionName;
         }
 
