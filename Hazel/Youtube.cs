@@ -90,10 +90,13 @@ namespace Hazel
 
         private static String getSignateFunctionName(String baseJs)
         {
-            String pattern = "\"signature\",\\s?([a-zA-Z0-9$]+)\\(";
+            String pattern = @"\bc\s*&&\s*d\.set\([^,]+\s*,\s*\([^)]*\)\s*\(\s*(?<sig>[a-zA-Z0-9$]+)\(";
+
             String signateFucntionName = Pattern.Match(pattern, baseJs);
-            signateFucntionName = signateFucntionName.Split(',')[1];
-            signateFucntionName = signateFucntionName.Substring(0, signateFucntionName.Length - 1);
+            signateFucntionName = signateFucntionName.Split(')')[1];
+            signateFucntionName = signateFucntionName.Substring(1, signateFucntionName.Length - 1);
+            signateFucntionName = signateFucntionName.Substring(0, 2);
+            MessageBox.Show(signateFucntionName);
             return signateFucntionName;
         }
 

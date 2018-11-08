@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-D:\Home\Hazel\Hazel\Hazel\obj\Release\
+D:\Hazel\Hazel\obj\Release\
 Hazel
 none
 false
 TRACE
-D:\Home\Hazel\Hazel\Hazel\App.xaml
+D:\Hazel\Hazel\App.xaml
 7329353623
 
 19-1011537435
-16-864030665
+161754981563
 MainWindow.xaml;Player\Player.xaml;Player\PlayerPage.xaml;Player\PlayListPage.xaml;Player\SearchPage.xaml;Player\TrackBar.xaml;Player\VolumeTrackBar.xaml;
 
 False

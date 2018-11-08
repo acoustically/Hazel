@@ -12,7 +12,7 @@ namespace Hazel
     {
         public static String Match(String pattern, String document)
         {
-            Regex regex = new Regex(pattern, RegexOptions.IgnoreCase);
+            Regex regex = new Regex(pattern,RegexOptions.ExplicitCapture);
             MatchCollection matches = regex.Matches(document);
             return matches[0].Value;
         }
